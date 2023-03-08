@@ -1,5 +1,5 @@
 ## 디렉토리 구조
-
+readed
 ├─components : 컴포넌트는 페이지별로 그룹화
 │ ├─Camping
 │ └─Home
