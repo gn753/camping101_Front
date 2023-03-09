@@ -1,17 +1,17 @@
 type LayoutProps = {
   header: ReactNode;
-  page: ReactNode;
+  main: ReactNode;
   footer: ReactNode;
 };
 
-export const Layout = ({ header, footer, page }: LayoutProps) => {
+export default function Layout({ header, footer, main }: LayoutProps) {
   return (
     <div>
       {header}
       <div>
-        <div>{page}</div>
+        <div>{main}</div>
       </div>
       {footer}
     </div>
   );
-};
+}
