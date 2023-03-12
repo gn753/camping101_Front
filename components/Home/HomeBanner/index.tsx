@@ -1,21 +1,18 @@
 import styled from "@emotion/styled";
 import Container from "layouts/Container";
 
-export default function Footer() {
+export default function HomeBanner() {
   return (
     <Wrapper>
       <Container>
-        <Text>Footer</Text>
+        <img src="http://placehold.it/1024x300" />
       </Container>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  height: 200px;
-  background-color: rgb(247, 249, 250);
-`;
-
-const Text = styled.h1`
-  font-size: 40px;
+  height: 300px;
+  border: 1px solid black;
+  margin-top: 20px;
 `;

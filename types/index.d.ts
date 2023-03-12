@@ -1,7 +1,7 @@
-type ReactText = string | number;
-type ReactChild = ReactElement | ReactText;
-interface ReactNodeArray extends Array<ReactNode> {}
-type ReactNode =
+export type ReactText = string | number;
+export type ReactChild = ReactElement | ReactText;
+export interface ReactNodeArray extends Array<ReactNode> {}
+export type ReactNode =
   | ReactChild
   | ReactFragment
   | ReactPortal
@@ -9,6 +9,6 @@ type ReactNode =
   | null
   | undefined;
 
-type Props = {
+export type Props = {
   children: ReactNode;
 };

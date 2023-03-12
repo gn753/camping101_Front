@@ -1,3 +1,6 @@
+import styled from "@emotion/styled";
+import { ReactNode } from "types";
+
 type LayoutProps = {
   header: ReactNode;
   main: ReactNode;
@@ -6,12 +9,22 @@ type LayoutProps = {
 
 export default function Layout({ header, footer, main }: LayoutProps) {
   return (
-    <div>
+    <Wrapper>
       {header}
-      <div>
-        <div>{main}</div>
-      </div>
+      <Main id="main">{main}</Main>
       {footer}
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+const Main = styled.main`
+  width: 1024px;
+  margin: auto;
+`;
