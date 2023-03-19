@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Layout from "layouts/Layout";
-import Header from "layouts/Header";
-import Footer from "layouts/Footer";
-import Home from "components/Home";
+import Layout from "components/layouts/Layout";
+import Header from "components/layouts/Header";
+import Footer from "components/layouts/Footer";
+import Home from "features/Home";
 
 function HomePage() {
   return (

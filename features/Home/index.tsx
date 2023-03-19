@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
-import Carousel from "features/Carousel";
+import HomeBanner from "./components/HomeBanner";
+import HomeCarousel from "./components/HomeCarousel";
 
-export default function HomeCarousel() {
+export default function Home() {
   return (
     <section>
+      <HomeBanner />
       <HomeTitle>실시간 캠핑로그</HomeTitle>
-      <Carousel />
+      <HomeCarousel />
       <HomeTitle>신규 입점 캠핑장</HomeTitle>
-      <Carousel />
+      <HomeCarousel />
     </section>
   );
 }

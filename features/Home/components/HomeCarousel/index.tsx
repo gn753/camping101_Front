@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import CarouselList from "features/Carousel/components/CarouselList";
-import NextButton from "features/Carousel/components/NextButton";
-import PrevButton from "features/Carousel/components/PrevButton";
+import CarouselList from "features/Home/components/CarouselList";
+import NextButton from "features/Home/components/NextButton";
+import PrevButton from "features/Home/components/PrevButton";
 import { useState } from "react";
-import { data } from "features/Carousel/data/dummy";
+import { data } from "../../data/dummy";
 
 interface Props {
   slidesPerView: number; // 몇개의 슬라이드를 보여줄것인가
@@ -11,7 +11,7 @@ interface Props {
   sectionWidth: number; // 슬라이드 섹션의 너비는?
 }
 
-export default function Carousel({
+export default function HomeCarousel({
   slidesPerview = 4,
   slideMargin = 20,
   sectionWidth = 1024,

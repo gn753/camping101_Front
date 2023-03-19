@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import CarouselItem from "features/Carousel/components/CarouselItem";
+import CarouselItem from "features/Home/components/CarouselItem";
 
 interface Props {
   data: any;
@@ -7,22 +7,11 @@ interface Props {
   slideMargin: number;
 }
 
-export default function CarouselList({
-  data,
-  slideMoveX,
-  slideMargin,
-}: Props) {
-
-
-
+export default function CarouselList({ data, slideMoveX, slideMargin }: Props) {
   return (
     <CarouselView slideMoveX={slideMoveX}>
       {data.map((it: any, index: number) => (
-        <CarouselItem
-          key={index}
-          margin={slideMargin}
-          data={it}
-        />
+        <CarouselItem key={index} margin={slideMargin} data={it} />
       ))}
     </CarouselView>
   );

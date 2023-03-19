@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Container from "layouts/Container";
+import Container from "components/layouts/Container";
 
 export default function Footer() {
   return (

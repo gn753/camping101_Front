@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import useForm from "features/common/hooks/useForm";
-import validateSignUpForm from "features/SignUpForm/service/validateSignUpForm";
+import validateSignUpForm from "features/SignIn/service/validateSignUpForm";
 
 const props = {
   initialValues: { email: "", password: "", passwordConfirm: "", nickName: "" },

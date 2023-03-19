@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import SignInForm from "features/SignInForm";
-import Container from "layouts/Container";
+import SignInForm from "features/SignUp/components/SignInForm";
+import Container from "components/layouts/Container";
 import Link from "next/link";
 
 export default function SignIn() {
