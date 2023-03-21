@@ -11,7 +11,7 @@ export default function Footer() {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.footer`
   height: 200px;
   background-color: rgb(247, 249, 250);
 `;

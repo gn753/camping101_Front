@@ -33,7 +33,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 256px);
+  height: 100%;
   border: 1px solid blue;
 `;
 

@@ -1,142 +1,124 @@
 import { css } from "@emotion/react";
 
 export const global = css`
-  /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-  html,
-  body,
-  div,
-  span,
-  applet,
-  object,
-  iframe,
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  /* 기본 설정값 */
+  p,
   h1,
   h2,
   h3,
   h4,
   h5,
   h6,
-  p,
-  blockquote,
-  pre,
-  a,
-  abbr,
-  acronym,
-  address,
-  big,
-  cite,
-  code,
-  del,
-  dfn,
-  em,
-  img,
-  ins,
-  kbd,
-  q,
-  s,
-  samp,
-  small,
-  strike,
-  strong,
-  sub,
-  sup,
-  tt,
-  var,
-  b,
-  u,
-  i,
-  center,
+  ul,
+  ol,
+  li,
   dl,
   dt,
   dd,
-  ol,
-  ul,
-  li,
-  fieldset,
-  form,
-  label,
-  legend,
   table,
-  caption,
-  tbody,
-  tfoot,
-  thead,
-  tr,
   th,
   td,
-  article,
-  aside,
-  canvas,
-  details,
-  embed,
-  figure,
-  figcaption,
-  footer,
-  header,
-  hgroup,
-  menu,
-  nav,
-  output,
-  ruby,
-  section,
-  summary,
-  time,
-  mark,
-  audio,
-  video {
+  form,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  a,
+  button,
+  select {
     margin: 0;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article,
-  aside,
-  details,
-  figcaption,
-  figure,
-  footer,
-  header,
-  hgroup,
-  menu,
-  nav,
-  section {
-    display: block;
-  }
-  body {
-    line-height: 1;
-  }
-  ol,
-  ul {
-    list-style: none;
-  }
-  blockquote,
-  q {
-    quotes: none;
-  }
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
-    content: "";
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
   }
 
-  //
-  html {
+  body,
+  input,
+  textarea,
+  select,
+  button,
+  table {
+    font-family: 🌈;
+    font-size: 🌈;
+    line-height: 🌈;
+  }
+
+  html,
+  body {
     height: 100%;
   }
+
   body {
-    padding-top: 50px;
+    position: relative;
+    background-color: 🌈;
+    color: 🌈;
+    -webkit-text-size-adjust: none; /* 텍스트 크기 자동 조절 기능 : none */
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+
+  img,
+  fieldset,
+  iframe {
+    border: 0;
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: top;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  em,
+  address {
+    font-style: normal;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  a:focus,
+  input:focus,
+  button:focus,
+  textarea:focus {
+    outline: none;
+  }
+  button {
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  html,
+  body {
+    height: 100%; /* ✔️ Height on the parent will fix this issue. */
+  }
+  body {
+    margin-top: 50px;
+  }
+  html,
+  body,
+  body > div:first-child,
+  div#__next,
+  div#__next > div {
     height: 100%;
   }
 `;

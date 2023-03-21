@@ -23,7 +23,7 @@ const Wrapper = styled.div``;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh);
+  height: 100%;
 `;
 const FormTitle = styled.h2`
   font-size: 28px;
