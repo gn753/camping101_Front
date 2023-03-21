@@ -22,13 +22,25 @@ export default function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  border-top: 1px solid #eaedef;
-  border-bottom: 1px solid #eaedef;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100vw;
+  z-index: 999;
+  background-color: orange;
 `;
 
 const Container = styled.div`
   width: 1024px;
   margin: 0 auto;
+  padding: 1.2rem 1.6rem;
+  height: 50px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 `;
 
 const NavWrap = styled.nav`

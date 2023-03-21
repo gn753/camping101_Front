@@ -17,7 +17,7 @@ export default function MyPageForm() {
     ...props,
   });
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <MyPageTitle title="내 정보 수정" />
       <MyPageFormInputList
         values={values}

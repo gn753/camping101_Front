@@ -130,4 +130,13 @@ export const global = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  //
+  html {
+    height: 100%;
+  }
+  body {
+    padding-top: 50px;
+    height: 100%;
+  }
 `;

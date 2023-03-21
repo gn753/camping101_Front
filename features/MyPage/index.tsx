@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
 import MyPageForm from "./components/MyPageForm";
-import MyPageTitle from "./components/MyPageTitle";
-Container;
+
 export default function MyPage() {
   return (
     <Wrapper>
@@ -14,5 +13,7 @@ export default function MyPage() {
 }
 
 const Wrapper = styled.div`
-  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 40px;
+  height: 100%;
 `;

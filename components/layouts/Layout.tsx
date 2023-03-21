@@ -22,9 +22,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  box-sizing: border-box;
 `;
 
 const Main = styled.main`
-  width: 1024px;
-  margin: auto;
+  padding: 1rem;
+  padding-top: 0;
+  height: calc(100% - 250px);
 `;
