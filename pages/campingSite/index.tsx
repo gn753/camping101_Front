@@ -2,14 +2,14 @@ import Layout from "components/layouts/Layout";
 import Header from "components/layouts/Header";
 import { CampLogMain } from "features/CampLog/CampLogMain";
 import Footer from "components/layouts/Footer";
-import CampingSiteList from "features/CampingSiteList";
+import CampingSite from "features/CampingSite";
 
-export default function campingSiteListPage() {
+export default function campingSitePage() {
   return (
     <>
       <Layout
         header={<Header />}
-        main={<CampingSiteList />}
+        main={<CampingSite />}
         footer={<Footer />}
       ></Layout>
     </>

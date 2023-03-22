@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
 import Card from "./components/Card";
 
-export default function CampingSiteList() {
+export default function CampingSite() {
   return (
     <Container>
       <CardList>
