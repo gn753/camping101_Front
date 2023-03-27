@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
 import CampingEtcInfo from "./components/CampingEtcInfo";
+import CampingLog from "./components/CampingLog";
 import CampingSiteInfo from "./components/CampingSiteInfo";
 import CampingSiteIntro from "./components/CampingSiteIntro";
 import CampingSiteSelect from "./components/CampingSiteSelect";
@@ -14,6 +15,7 @@ export default function CampingSiteDetails() {
         <CampingSiteIntro />
         <CampingEtcInfo />
         <CampingSiteSelect />
+        <CampingLog />
       </Container>
     </Wrapper>
   );
@@ -22,7 +24,7 @@ export default function CampingSiteDetails() {
 function Figure() {
   return (
     <section>
-      <img src="http://placehold.it/1024x150" alt="test" />
+      <img http://placehold.it/1024x150" alt="test" />
     </section>
   );
 }
