@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import CampLogCard from "features/CampLog/components/CampLogCard";
 import Pagination from "components/Pagination";
-
-export const CampLogMain = () => {
+export default function CampLog() {
   return (
     <>
       <Wrapper>
@@ -21,7 +20,7 @@ export const CampLogMain = () => {
       </Wrapper>
     </>
   );
-};
+}
 
 const Wrapper = styled.div`
   width: 1024px;

@@ -7,8 +7,8 @@ export default function Header() {
       <Gnb>
         <GnbList>
           <Link href="/">캠핑 101 로고</Link>
-          <Link href="/">캠핑장</Link>
-          <Link href="/">캠프로그</Link>
+          <Link href="/campingSite">캠핑장</Link>
+          <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
           <Link href="/">로그인</Link>

@@ -24,7 +24,7 @@ export default function CampingSiteDetails() {
 function Figure() {
   return (
     <section>
-      <img http://placehold.it/1024x150" alt="test" />
+      <img src="http://placehold.it/1024x150" alt="test" />
     </section>
   );
 }

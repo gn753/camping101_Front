@@ -5,6 +5,7 @@ import Card from "./components/Card";
 export default function CampingSite() {
   return (
     <Container>
+      <h1>캠핑장 목록</h1>
       <CardList>
         <Card />
         <Card />
@@ -17,7 +18,7 @@ export default function CampingSite() {
 
 const CardList = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 20px;
 `;
