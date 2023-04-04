@@ -5,8 +5,11 @@ export default function validateSignUpForm(values: initialValuesProps) {
   const errors = {
     email: "",
     password: "",
-    passwordConfirm: "",
     nickName: "",
+    memberType:"",
+    phoneNumber:"",
+    signUpType:"",
+    profileImage:"",
   };
 
   if (!values.email) {
@@ -15,8 +18,14 @@ export default function validateSignUpForm(values: initialValuesProps) {
   if (!values.password) {
     errors.password = "비밀번호를 입력하세요";
   }
-  if (!values.passwordConfirm) {
-    errors.passwordConfirm = "비밀번호 확인을 입력하세요";
+  if (!values.memberType) {
+    errors.memberType = "memberType을 입력하세요";
+  }
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "phoneNumber을 입력하세요";
+  }
+  if (!values.signUpType) {
+    errors.signUpType = "signUpType을 입력하세요";
   }
 
   if (!values.nickName) {

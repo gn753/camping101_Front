@@ -1,38 +1,20 @@
 import styled from "@emotion/styled";
-import SignUpForm from "features/SignIn/components/SignUpForm";
-import Container from "components/layouts/Container";
-import Link from "next/link";
+import SignUpForm from "features/SignUp/components/SignUpForm";
+import FormFooter from "./components/FormFooter";
+import FormTitle from "./components/FormTitle";
 
 export default function SignUp() {
   return (
-    <Wrapper>
-      <Container>
-        <Content>
-          <FormTitle>회원가입</FormTitle>
-          <SignUpForm />
-          <FormFooter>
-            이미 아이디가 있으신가요 <Link href="/">로그인</Link>
-          </FormFooter>
-        </Content>
-      </Container>
-    </Wrapper>
+    <Container>
+      <FormTitle />
+      <SignUpForm />
+      <FormFooter />
+    </Container>
   );
 }
 
-const Wrapper = styled.div``;
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-const FormTitle = styled.h2`
-  font-size: 28px;
-  text-align: center;
-  margin-bottom: 20px;
-  padding-top: 100px;
-`;
-
-const FormFooter = styled.div`
-  text-align: center;
-  margin-top: 20px;
+const Container = styled.div`
+  width: 400px;
+  margin: auto;
+  padding: 0 50px;
 `;

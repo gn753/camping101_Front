@@ -1,6 +1,4 @@
-import Layout from "components/layouts/Layout";
-import Header from "components/layouts/Header";
-import Footer from "components/layouts/Footer";
+import ResetLayout from "components/layouts/ResetLayout";
 import SignIn from "features/SignIn";
 import Head from "next/head";
 
@@ -8,7 +6,7 @@ export default function SignInPage() {
   return (
     <>
       <Head>dㄴ</Head>
-      <Layout header={<Header />} footer={<Footer />} main={<SignIn />} />;
+      <ResetLayout main={<SignIn />} />;
     </>
   );
 }

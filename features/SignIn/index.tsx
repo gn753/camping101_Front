@@ -1,55 +1,32 @@
 import styled from "@emotion/styled";
-import SignInForm from "features/SignUp/components/SignInForm";
-import Container from "components/layouts/Container";
-import Link from "next/link";
+import SignInForm from "features/SignIn/components/SignInForm";
+import FormFooter from "./components/FormFooter";
+import FormTitle from "./components/FormTitle";
 
 export default function SignIn() {
   return (
-    <Wrapper>
-      <Container>
-        <Content>
-          <FormTitle>로그인 로고</FormTitle>
-          <SignInForm />
-          <FormFooter>
-            <nav>
-              <Link href="/">회원가입하기</Link>
-              <Link href="/">비밀번호 찾기</Link>
-            </nav>
-          </FormFooter>
-        </Content>
-      </Container>
-    </Wrapper>
+    <LoginWrapper>
+      <Content>
+        <FormTitle />
+        <SignInForm />
+        <FormFooter />
+      </Content>
+    </LoginWrapper>
   );
 }
 
-const Wrapper = styled.div`
+const LoginWrapper = styled.div`
+  max-width: 300px;
+  height: 100vh;
   margin: auto;
-  border: 1px solid black;
-  height: 100%;
+  margin-top: -70px;
 `;
 
 const Content = styled.div`
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  border: 1px solid blue;
-`;
-
-const FormTitle = styled.h3`
-  margin-top: 20px;
-  font-size: 28px;
-`;
-
-const FormFooter = styled.footer`
-  nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    height: 40px;
-  }
-  a {
-    color: black;
-  }
+  padding-top: 80px;
+  box-sizing: border-box;
 `;

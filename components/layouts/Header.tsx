@@ -11,8 +11,8 @@ export default function Header() {
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
-          <Link href="/">로그인</Link>
-          <Link href="/">회원가입</Link>
+          <Link href="/signIn">로그인</Link>
+          <Link href="/signUp">회원가입</Link>
         </GnbList>
       </Gnb>
     </HeaderWrapper>

@@ -1,25 +1,17 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "types";
-
 type LayoutProps = {
   header?: ReactNode;
   main: ReactNode;
   footer?: ReactNode;
 };
 
-export default function Layout({ header, footer, main }: LayoutProps) {
-  return (
-    <>
-      {header}
-      <Main id="main">{main}</Main>
-      {footer}
-    </>
-  );
+export default function ResetLayout({ main }: LayoutProps) {
+  return <Main>{main}</Main>;
 }
 
 const Main = styled.main`
   position: relative;
   background: lemonchiffon;
-  min-height: calc(100% - 250px);
-  padding: 0 1rem 1rem 1rem;
+  height: 100vh;
 `;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-interface Props extends ButtonBasicProps {
+interface Props extends ButtonStyleProps {
   title: string;
 }
 
@@ -17,13 +17,13 @@ export default function Button({
   );
 }
 
-interface ButtonBasicProps {
+interface ButtonStyleProps {
   color?: string;
   margin?: [number, number, number, number] | string;
   padding?: [number, number, number, number];
 }
 
-const ButtonBasic = styled.button<ButtonBasicProps>`
+const ButtonBasic = styled.button<ButtonStyleProps>`
   all: unset;
   display: block;
   background-color: ${(props) => props.color};
