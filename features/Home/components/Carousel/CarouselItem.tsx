@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -7,20 +8,23 @@ interface Props {
 }
 
 export default function CarouselItem({ title, id, image }: Props) {
+  console.log(id);
   return (
-    <Slide href={`{/campLog/${id}}`}>
-      <img src={image} />
-      <Title>{title}</Title>
+    <Slide>
+      <Link href={`/campLog/details/${id}`}>
+        <img src={image} />
+        <Title>{title}</Title>
+      </Link>
     </Slide>
   );
 }
 
-const Slide = styled.a`
-  display:inline-block;
+const Slide = styled.div`
+  display: inline-block;
   width: calc((100% - 60px) / 4);
-  margin-right:20px;
+  margin-right: 20px;
   img {
-    width:100%:
+    width: 100%;
   }
 `;
 

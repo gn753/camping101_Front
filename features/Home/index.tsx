@@ -11,7 +11,7 @@ export default function Home() {
       <HomeTitle>실시간 캠핑로그</HomeTitle>
       <HomeCampLog />
       <HomeTitle>실시간 캠핑장</HomeTitle>
-      <HomeCampingSite />
+      {/* <HomeCampingSite /> */}
     </Container>
   );
 }

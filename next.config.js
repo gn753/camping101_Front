@@ -3,8 +3,9 @@ module.exports = {
   async rewrites() {
     return [
       {
-        destination: process.env.DESTINATION_URL, //서버 주소.
+        //ssr
         source: process.env.SOURCE_PATH, // 라우팅하려는 경로.
+        destination: process.env.DESTINATION_URL, //서버 주소.
       },
     ];
   },

@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 
-export default function Pagination() {
+export default function Pagination({ comments }: any) {
   return (
     <PaginationUl>
       <PaginationLi>&lt;</PaginationLi>
-      <PaginationLi>1</PaginationLi>
-      <PaginationLi>2</PaginationLi>
-      <PaginationLi>3</PaginationLi>
+      <PaginationLi>
+        <Link href="/campLog/details/3?comments=1">1</Link>
+      </PaginationLi>
+      <PaginationLi>
+        <Link href="/campLog/details/3?comments=2">2</Link>
+      </PaginationLi>
+      <PaginationLi>
+        <Link href="/campLog/details/3?comments=3">3</Link>
+      </PaginationLi>
       <PaginationLi>4</PaginationLi>
       <PaginationLi>5</PaginationLi>
       <PaginationLi>&gt;</PaginationLi>
@@ -29,4 +36,5 @@ const PaginationLi = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;

@@ -3,7 +3,7 @@ import Header from "components/layouts/Header";
 import Footer from "components/layouts/Footer";
 import CampLog from "features/CampLog";
 
-export default function campLog() {
+export default function CampLogPage() {
   return (
     <>
       <Layout
