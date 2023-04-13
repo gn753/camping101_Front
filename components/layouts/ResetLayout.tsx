@@ -12,6 +12,5 @@ export default function ResetLayout({ main }: LayoutProps) {
 
 const Main = styled.main`
   position: relative;
-  background: lemonchiffon;
   height: 100vh;
 `;

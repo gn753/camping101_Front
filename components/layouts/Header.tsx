@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
+import useLogin from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
 
 export default function Header() {
+  const { isLogin } = useLogin();
+  console.log(isLogin, "islogin");
   return (
     <HeaderWrapper>
       <Gnb>
@@ -11,7 +14,12 @@ export default function Header() {
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
-          <Link href="/signIn">로그인</Link>
+          {isLogin ? (
+            <Link href="/myPage">마이페이지</Link>
+          ) : (
+            <Link href="/signIn">로그인</Link>
+          )}
+
           <Link href="/signUp">회원가입</Link>
         </GnbList>
       </Gnb>
@@ -25,7 +33,7 @@ const HeaderWrapper = styled.header`
   left: 0;
   width: 100%;
   z-index: 999;
-  background-color: orange;
+  border: 1px solid #eee;
 `;
 
 const Gnb = styled.nav`

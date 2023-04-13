@@ -6,19 +6,19 @@ import DetailsHeader from "./components/DetailsHeader";
 import DetailsComment from "./components/DetailsComment/DetailsCommet";
 import { CampLogDetailsResponse } from "./types";
 import { useState } from "react";
+import Hr from "components/base/Hr";
 
 interface Props {
   details: CampLogDetailsResponse;
-
 }
 
 export default function CampLogDetails({ details }: Props) {
-
   return (
     <Wrapper>
       <DetailsPhoto />
       <Container>
         <DetailsHeader details={details} />
+        <Hr />
         {details && <DetailsBody details={details} />}
         <DetailsComment />
       </Container>

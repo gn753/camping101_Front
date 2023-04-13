@@ -41,11 +41,11 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
   }, []);
 
   const slideMoveX = (width + 20) * currentSlide; // 슬라이드 이동간격
-
+  
   return (
     <Wrapper ref={slideWidthRef}>
       <CarouselInner>
-        <CarouselContent style={{ transform: `translateX(${-slideMoveX}px)` }}>
+        <CarouselContent slideMoveX={slideMoveX}>
           {slideType === "캠핑장" &&
             slides.map((slide: CampinSiteDetails, index: number) => (
               <CarouselItem
@@ -88,9 +88,13 @@ const CarouselInner = styled.div`
   }
 `;
 
-interface CarouselContentProps {}
+interface CarouselContentProps {
+  slideMoveX: number;
+}
 
-const CarouselContent = styled.div``;
+const CarouselContent = styled.div<CarouselContentProps>`
+  transition: ${(props) => `translateX(${-props.slideMoveX}px)`};
+`;
 {
   /* {slideType === "캠프로그" &&
             slides.map((slide, index) => (

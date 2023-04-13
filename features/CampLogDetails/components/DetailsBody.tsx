@@ -39,6 +39,7 @@ const CampingSiteSummary = styled.div`
   background-color: #eee;
   padding: 10px;
   border-radius: 10px;
+  margin: 2rem 0;
 `;
 
 const EditorIntroduce = styled.div`

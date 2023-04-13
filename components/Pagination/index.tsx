@@ -1,22 +1,32 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-export default function Pagination({ comments }: any) {
+export default function Pagination({currentPage, totalPages }: any) {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
     <PaginationUl>
-      <PaginationLi>&lt;</PaginationLi>
-      <PaginationLi>
-        <Link href="/campLog/details/3?comments=1">1</Link>
-      </PaginationLi>
-      <PaginationLi>
-        <Link href="/campLog/details/3?comments=2">2</Link>
-      </PaginationLi>
-      <PaginationLi>
-        <Link href="/campLog/details/3?comments=3">3</Link>
-      </PaginationLi>
-      <PaginationLi>4</PaginationLi>
-      <PaginationLi>5</PaginationLi>
-      <PaginationLi>&gt;</PaginationLi>
+     {currentPage !== 1 && (
+        <li>
+          <Link href={`/?page=${currentPage - 1}`}>
+            <a>Previous</a>
+          </Link>
+        </li>
+      )}
+      {pages.map((page) => (
+        <li key={page}>
+          <Link href={`/?page=${page}`}>
+            <a className={page === currentPage ? 'active' : ''}>{page}</a>
+          </Link>
+        </li>
+      ))}
+      {currentPage !== totalPages && (
+        <li>
+          <Link href={`/?page=${currentPage + 1}`}>
+            <a>Next</a>
+          </Link>
+        </li>
+      )}
     </PaginationUl>
   );
 }

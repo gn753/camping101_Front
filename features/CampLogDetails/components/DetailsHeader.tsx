@@ -28,7 +28,7 @@ export default function DetailsHeader({ details }: Props) {
 }
 
 const Wrapper = styled.header`
-  margin: 20px 0;
+  padding: 1.5rem 0;
 `;
 
 const UserProfile = styled.div`

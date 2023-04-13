@@ -1,116 +1,94 @@
 import styled from "@emotion/styled";
-import { axiosSetting } from "api/api";
 import { useState } from "react";
-import { SignUpResponse } from "../types";
 import MemberType from "./MemberType";
 import SignUpType from "./SignUpType";
-
-const defaultValues = {
-  nickName: "",
-  email: "",
-  password: "",
-  profileImage: [],
-  memberType: "",
-  phoneNumber: "",
-  signUpType: "",
-};
+import { useForm } from "react-hook-form";
 
 const url = "api/signup/mail";
 
+interface useFormProps {
+  memberType: string;
+  signUpType: string;
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  phone: string;
+  file: [];
+}
+
 export default function SignUpForm() {
-  const [values, setValues] = useState(defaultValues);
-  const [file, setFile] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const { register, formState, handleSubmit, getValues } =
+    useForm<useFormProps>({
+      mode: "onSubmit",
+      defaultValues: {
+        memberType: "CUSTOMER",
+        signUpType: "EMAIL",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        phone: "",
+        file: [],
+      },
+    });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = event.target;
-    if (files && files.length > 0) setValues({ ...values, [name]: files[0] });
-    else setValues({ ...values, [name]: value });
-  };
+  // const getSignUp = async () => {
+  //   if (isLoading) return;
+  //   setIsLoading(true);
+  //   let formData = new FormData();
+  //   formData.append("memberType", "CUSTOMER");
+  //   formData.append("signUpType", "EMAIL");
+  //   formData.append("nickName", formInputs.nickName);
+  //   formData.append("email", formInputs.email);
+  //   formData.append("password", formInputs.password);
+  //   formData.append("phoneNumber", formInputs.phoneNumber);
+  //   formData.append("profileImage", formInputs.profileImage[0]);
 
-  const onSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    alert(JSON.stringify(values, null, 2));
-    console.log(values, "vlaues");
-  };
+  //   const response = await axiosSetting
+  //     .get(url)
+  //     .then(function (response) {
+  //       console.log(response);
+  //       setIsLoading(false);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       setIsLoading(false);
+  //     });
+  //   console.log(response, "response");
+  // };
 
-  const fetchAuth = async () => {
-    let formData = new FormData();
-    formData.append("memberType", "CUSTOMER");
-    formData.append("signUpType", "EMAIL");
-    formData.append("nickName", values.nickName);
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    formData.append("phoneNumber", values.phoneNumber);
-    formData.append("profileImage", values.profileImage[0]);
-
-    const response = await axiosSetting
-      .get(url)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(response, "response");
-  };
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <>
-      <Form method="post" onSubmit={onSubmit} id="formElem">
-        <MemberType />
-        <SignUpType />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <MemberType register={register} />
+        <SignUpType register={register} />
         <FormInputTextFiled>
           <label>닉네임</label>
-          <Input
-            type="text"
-            name="nickName"
-            placeholder="닉네임"
-            value={values.nickName}
-            onChange={handleChange}
-          />
+          <Input {...register("name")} />
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>프로필</label>
-          <Input
-            type="file"
-            name="profileImage"
-            placeholder="프로필이미지"
-            onChange={handleChange}
-          />
+          <Input type="file" {...register("file")} />
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>이메일</label>
-          <Input
-            type="text"
-            name="email"
-            value={values.email}
-            placeholder="이메일"
-            onChange={handleChange}
-          />
+          <Input {...register("email")} />
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>패스워드</label>
-          <Input
-            type="password"
-            name="password"
-            value={values.password}
-            placeholder="비밀번호"
-            onChange={handleChange}
-          />
+          <Input {...register("password")} />
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>연락처</label>
-          <Input
-            type="text"
-            name="phoneNumber"
-            value={values.phoneNumber}
-            placeholder="연락처"
-            onChange={handleChange}
-          />
+          <Input {...register("phone")} />
         </FormInputTextFiled>
-        <button onClick={fetchAuth}>회원가입하기</button>
+        <Button disabled={isLoading ? true : false}>
+          <span>회원가입하기</span>
+        </Button>
       </Form>
-      <button onClick={fetchAuth}>회원가입하기</button>
     </>
   );
 }
@@ -134,4 +112,25 @@ const Input = styled.input`
   width: 100%;
   width: 300px;
   padding: 10px 10px;
+`;
+
+const Button = styled.button`
+  display: block;
+  width: 100%;
+  display: block;
+  margin: 20px 0px;
+  width: 100%;
+  border: 1px solid black;
+  padding: 10px 3px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #35c5f0;
+  border-color: #35c5f0;
+  color: #fff;
+  cursor: pointer;
+  span {
+    font-size: 18px;
+    color: #fff;
+  }
 `;

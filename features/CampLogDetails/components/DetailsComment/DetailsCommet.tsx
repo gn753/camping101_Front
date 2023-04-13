@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import {
-  CampLogDetailsComments,
-} from "../../types";
+import { CampLogDetailsCommentResponse } from "../../types";
 import { axiosSetting } from "api/api";
 import { useRouter } from "next/router";
 import DetailsCommentList from "./DetailsCommentList";
@@ -11,7 +9,9 @@ import Pagination from "components/Pagination";
 const url = "/api/camplog/comment";
 export default function DetailsComment() {
   const [formValue, setFormValue] = useState("");
-  const [comments, setComments] = useState<CampLogDetailsComments[] | []>([]);
+  const [comments, setComments] =
+    useState<CampLogDetailsCommentResponse | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
   const id = router.query.id;
 
@@ -29,7 +29,7 @@ export default function DetailsComment() {
           },
         })
         .then((response) => {
-          setComments(response.data.comments);
+          setComments(response.data);
         });
     }
   }, [id]);
@@ -48,8 +48,10 @@ export default function DetailsComment() {
           <button>입력</button>
         </CommentInputWrapper>
       </form>
-      {comments.length > 0 && <DetailsCommentList comments={comments} />}
-      <Pagination commetns={comments} />
+      {comments && comments.comments.length > 0 && (
+        <DetailsCommentList comments={comments?.comments} />
+      )}
+      <Pagination totalPages={comments?.total} currentPage={currentPage}/>
     </section>
   );
 }

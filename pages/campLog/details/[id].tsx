@@ -18,7 +18,12 @@ export default function CampLogDetailsPage({ details }: any) {
 
 const url = `${process.env.BASE_URL}/camplog/`;
 
-export async function getServerSideProps({ query }: any) {
+export async function getServerSideProps({ query, res }: any) {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59",
+  );
+
   const id = query.id;
   const dynamicPath = url + id;
   const response = await axiosSetting.get(dynamicPath);

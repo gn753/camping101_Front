@@ -1,41 +1,62 @@
 import styled from "@emotion/styled";
-import useForm from "features/common/hooks/useForm";
-import validateSignInForm from "features/SignIn/service/validateSignInForm";
 import GoogleSubmit from "./GoogleSubmit";
+import { useForm } from "react-hook-form";
+import { axiosSetting } from "api/api";
+import useLogin from "../hooks/useLogin";
 
-const props = {
-  initialValues: { email: "", password: "" },
-  validate: validateSignInForm,
-  onSubmit: (values: any) => {
-    alert(JSON.stringify(values, null, 2));
-  },
-};
+const url = "/api/signin/mail";
+
+interface useFormProps {
+  email: string;
+  password: string;
+}
 
 export default function SignInForm() {
-  const { values, errors, handleChange, handleSubmit } = useForm({
-    ...props,
+  const { getLoginToken } = useLogin();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<useFormProps>({
+    mode: "onSubmit",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
+
+  const onSubmit = async (data: useFormProps) => {
+    await getLoginToken(data);
+  };
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           type="text"
-          name="email"
-          value={values.email}
-          placeholder="이메일"
-          onChange={handleChange}
+          {...register("email", {
+            required: true,
+            pattern: {
+              value:
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+              message: "이메일 형식에 맞지 않습니다.",
+            },
+          })}
         />
-        <FiledText>{errors.email}</FiledText>
+        {errors?.email ? (
+          <p className="error">{errors.email?.message}</p>
+        ) : null}
         <FormInput
+          id="password"
           type="password"
-          name="password"
-          value={values.password}
-          placeholder="비밀번호"
-          onChange={handleChange}
+          {...register("password", {
+            required: "비밀번호는 필수 입력입니다.",
+          })}
         />
-        <FiledText>{errors.password}</FiledText>
-        <FormButton>로그인하기</FormButton>
+        {errors?.email ? (
+          <p className="error">{errors.password?.message}</p>
+        ) : null}
+        <FormButton>로그인</FormButton>
         <GoogleSubmit />
       </Form>
     </>
