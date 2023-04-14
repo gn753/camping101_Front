@@ -3,6 +3,8 @@ import { useState } from "react";
 import MemberType from "./MemberType";
 import SignUpType from "./SignUpType";
 import { useForm } from "react-hook-form";
+import { axiosSetting } from "api/api";
+import { useRouter } from "next/router";
 
 const url = "api/signup/mail";
 
@@ -19,46 +21,43 @@ interface useFormProps {
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, formState, handleSubmit, getValues } =
-    useForm<useFormProps>({
-      mode: "onSubmit",
-      defaultValues: {
-        memberType: "CUSTOMER",
-        signUpType: "EMAIL",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        phone: "",
-        file: [],
-      },
-    });
+  const router = useRouter();
+  const { register, handleSubmit } = useForm<useFormProps>({
+    mode: "onSubmit",
+    defaultValues: {
+      memberType: "CUSTOMER",
+      signUpType: "EMAIL",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      phone: "",
+      file: [],
+    },
+  });
 
-  // const getSignUp = async () => {
-  //   if (isLoading) return;
-  //   setIsLoading(true);
-  //   let formData = new FormData();
-  //   formData.append("memberType", "CUSTOMER");
-  //   formData.append("signUpType", "EMAIL");
-  //   formData.append("nickName", formInputs.nickName);
-  //   formData.append("email", formInputs.email);
-  //   formData.append("password", formInputs.password);
-  //   formData.append("phoneNumber", formInputs.phoneNumber);
-  //   formData.append("profileImage", formInputs.profileImage[0]);
+  const onSubmit = async (data: any) => {
+    const formData = new FormData();
 
-  //   const response = await axiosSetting
-  //     .get(url)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       setIsLoading(false);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       setIsLoading(false);
-  //     });
-  //   console.log(response, "response");
-  // };
+    formData.append("memberType", data.memberType);
+    formData.append("signUpType", data.signUpType);
+    formData.append("nickname", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("phoneNumber", data.phone);
+    formData.append("profileImage", data.file[0]);
 
-  const onSubmit = (data: any) => console.log(data);
+    await axiosSetting
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setIsLoading(false);
+        router.push("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <>

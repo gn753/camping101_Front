@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { RealTimeCampLogDetails, CampinSiteDetails } from "features/Home/types";
 import { useRef } from "react";
 import CarouselControls from "./CarouselControls";
@@ -41,7 +41,7 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
   }, []);
 
   const slideMoveX = (width + 20) * currentSlide; // 슬라이드 이동간격
-  
+
   return (
     <Wrapper ref={slideWidthRef}>
       <CarouselInner>
@@ -93,11 +93,6 @@ interface CarouselContentProps {
 }
 
 const CarouselContent = styled.div<CarouselContentProps>`
-  transition: ${(props) => `translateX(${-props.slideMoveX}px)`};
+  transform: ${(props) => `translateX(${-props.slideMoveX}px)`};
+  transition: 0.5s;
 `;
-{
-  /* {slideType === "캠프로그" &&
-            slides.map((slide, index) => (
-              <CampLogItem campName={slide.campName} key={index} />
-            ))} */
-}

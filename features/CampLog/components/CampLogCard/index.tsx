@@ -3,33 +3,45 @@ import styled from "@emotion/styled";
 export default function CampLogCard() {
   return (
     <CardWrapper>
-      <CardFigure />
-      <CardTitle>
-        온수수영장에 아이들 놀곳이 많아 신나게 놀고왔어요. …
-      </CardTitle>
-      <CardWriter>
-        <WriterImg />
-        <span>작성자</span>
-      </CardWriter>
-      <CardWriterCreated>25분 전</CardWriterCreated>
+      <CardFigure src="http://placehold.it/400x300" />
+      <CardBody>
+        <CardTitle>온수수영장에 아이들 놀곳</CardTitle>
+        <CardDescritpion>
+          온수수영장에 아이들 놀곳이 많아 신나게 놀고왔어요. 저녁에 해주시는
+          콘서트도 감성돋는 시간이었네요. 두분 모두 어찌나 노래를 잘하시는지…
+        </CardDescritpion>
+        <CardFooter>
+          <CardWriter>
+            <WriterImg />
+            <span>작성자</span>
+          </CardWriter>
+          <CardWriterCreated>25분 전</CardWriterCreated>
+        </CardFooter>
+      </CardBody>
     </CardWrapper>
   );
 }
 
 const CardWrapper = styled.div`
-  width: 300px;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 100px;
 `;
 
 const CardFigure = styled.img`
-  width: 300px;
-  height: 300px;
-  background-color: silver;
+  width: 100px;
+  height: 100%;
   margin-bottom: 20px;
   cursor: pointer;
 `;
+
+const CardBody = styled.div`
+  width: 100%;
+`;
+
 const CardTitle = styled.h3`
-  width: 300px;
-  height: auto;
+  width: 500px;
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 10px;
@@ -41,23 +53,29 @@ const CardTitle = styled.h3`
   cursor: pointer;
 `;
 
-const CardWriter = styled.div`
-  border: 1px solid black;
-  width: 100px;
-  margin: 5px 100px;
-  font-size: 14px;
+const CardDescritpion = styled.p`
+  display: block;
+  width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const CardFooter = styled.footer`
   display: flex;
-  justify-content: sapce-between;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const CardWriter = styled.div`
+  display: flex;
+  gap: 10px;
   cursor: pointer;
+  border: 1px solid black;
+  font-size: 14px;
 `;
 const CardWriterCreated = styled.div`
-  margin-top: 5px;
-  margin-bottom: 30px;
-  margin-left: 120px;
-  margin-right: 120px;
   font-size: 14px;
-  border: 1px solid black;
-  width: auto;
 `;
 
 const WriterImg = styled.img`

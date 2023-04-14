@@ -6,16 +6,11 @@ export default function CampLog() {
     <>
       <Wrapper>
         <CountDiv>전체 {"1,200"}</CountDiv>
-        <TopDiv>
-          <CampLogCard />
-          <CampLogCard />
-          <CampLogCard />
-        </TopDiv>
-        <TopDiv>
-          <CampLogCard />
-          <CampLogCard />
-          <CampLogCard />
-        </TopDiv>
+        <CampLogCard />
+        <CampLogCard />
+        <CampLogCard />
+        <CampLogCard />
+        <CampLogCard />
         <Pagination />
       </Wrapper>
     </>
