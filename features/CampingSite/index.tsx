@@ -1,24 +1,18 @@
-import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
-import Card from "./components/Card";
+import CampingSiteList from "./components/CampingSiteList";
+import CampingSiteTitle from "./components/CampingSiteTitle";
+import styled from "@emotion/styled";
 
 export default function CampingSite() {
   return (
-    <Container>
-      <h1>캠핑장 목록</h1>
-      <CardList>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </CardList>
-    </Container>
+    <Wrapper>
+      <CampingSiteTitle />
+      <CampingSiteList />
+    </Wrapper>
   );
 }
 
-const CardList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 20px;
+const Wrapper = styled.div`
+  max-width: 768px;
+  margin: auto;
 `;
