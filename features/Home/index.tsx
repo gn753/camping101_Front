@@ -2,9 +2,13 @@ import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
 import HomeBanner from "./components/HomeBanner";
 import HomeCampLog from "./components/HomeCampLog";
-import HomeCampingSite from "./components/HomeCampingSite";
+
+
+const url = "/api/signin/mail";
 
 export default function Home() {
+
+
   return (
     <Container>
       <HomeBanner />

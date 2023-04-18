@@ -51,7 +51,7 @@ export default function SignUpForm() {
       .then(function (response) {
         console.log(response);
         setIsLoading(false);
-        router.push("/login");
+        router.push("/signIn");
       })
       .catch(function (error) {
         console.log(error);
