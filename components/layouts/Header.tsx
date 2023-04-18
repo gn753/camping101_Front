@@ -1,10 +1,24 @@
 import styled from "@emotion/styled";
-import useLogin from "features/SignIn/hooks/useLogin";
+import { AuthState } from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
+import { useCallback } from "react";
+import { useRecoilState } from "recoil";
+
+useCallback;
 
 export default function Header() {
-  const { isLogin } = useLogin();
-  console.log(isLogin, "islogin");
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(AuthState);
+
+  const removeToken = useCallback(() => {
+    sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("refresh_token");
+  }, []);
+
+  const handleLgout = useCallback(async () => {
+    removeToken();
+    setIsLoggedIn(false);
+  }, []);
+
   return (
     <HeaderWrapper>
       <Gnb>
@@ -14,13 +28,19 @@ export default function Header() {
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
-          {isLogin ? (
-            <Link href="/myPage">마이페이지</Link>
+          {isLoggedIn ? (
+            <>
+              <Link href="/myPage">마이페이지</Link>
+              <Link href="/signIn">
+                <button onClick={handleLgout}>로그아웃</button>
+              </Link>
+            </>
           ) : (
-            <Link href="/signIn">로그인</Link>
+            <>
+              <Link href="/signIn">로그인</Link>
+              <Link href="/signUp">회원가입</Link>
+            </>
           )}
-
-          <Link href="/signUp">회원가입</Link>
         </GnbList>
       </Gnb>
     </HeaderWrapper>
@@ -56,5 +76,9 @@ const GnbList = styled.div`
     width: 150px;
     height: 55px;
     text-decoration: none;
+    color: black;
+  }
+  button {
+    font-size: 16px;
   }
 `;

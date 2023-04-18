@@ -1,22 +1,13 @@
 import styled from "@emotion/styled";
-import CampLogCard from "features/CampLog/components/CampLogCard";
-import Link from "next/link";
+import MyPageMenu from "./components/MyPageMenu";
+import MyPageBookmark from "./components/MyPageBookmark";
 
-const data = [1, 2, 3, 4];
+
 export default function MyPage() {
   return (
     <Wrapper>
-      <Header>
-        <h1>마이페이지</h1>
-        <button>로그아웃 </button>
-        <Link href="/myPage/modify">수정하기 </Link>
-      </Header>
-      <Conetent>
-        북마크 리스트
-        {data.map((card) => (
-          <CampLogCard></CampLogCard>
-        ))}
-      </Conetent>
+      <MyPageMenu/>
+      <MyPageBookmark/>
     </Wrapper>
   );
 }
