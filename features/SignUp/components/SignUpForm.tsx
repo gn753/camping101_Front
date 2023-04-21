@@ -47,7 +47,11 @@ export default function SignUpForm() {
     formData.append("profileImage", data.file[0]);
 
     await axiosSetting
-      .get(url)
+      .post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(function (response) {
         console.log(response);
         setIsLoading(false);
