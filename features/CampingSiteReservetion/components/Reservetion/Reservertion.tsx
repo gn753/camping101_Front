@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import Scheduling from "./Scheduling";
 
 export default function Reservertion() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -28,7 +27,7 @@ export default function Reservertion() {
         </li>
       </InfoList>
       <OpenButton onClick={handleOpen}>펼치기</OpenButton>
-      {isOpen && <Scheduling />}
+      
     </section>
   );
 }

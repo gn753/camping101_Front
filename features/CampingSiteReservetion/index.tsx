@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
-import Reservertion from "./components/Reservertion";
+import Calendar from "./components/Calendar";
 
 interface Props {
   siteType: any;
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default function CampingSiteReservetion() {
+
   return (
     <Wrapper>
       <Container>
@@ -27,7 +28,7 @@ export default function CampingSiteReservetion() {
             quidem blanditiis!
           </p>
         </Introduce>
-        <Reservertion />
+        <Calendar />
       </Container>
     </Wrapper>
   );
