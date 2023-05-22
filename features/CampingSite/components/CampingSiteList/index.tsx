@@ -1,17 +1,13 @@
 import styled from "@emotion/styled";
 import CampingSiteItem from "./CampingSiteItem";
+import nanoid from "features/common/utils/nanoid";
 
-export default function CampingSiteList() {
+export default function CampingSiteList({ camps }: any) {
   return (
     <ListView>
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
-      <CampingSiteItem />
+      {camps.map((camp: any) => (
+        <CampingSiteItem key={nanoid()} {...camp} />
+      ))}
     </ListView>
   );
 }

@@ -1,24 +1,21 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-
+//next js hydrate html상 에러 aㅅ
 export default function CampingSiteItem({ ...rest }: any) {
-  const { campId, campName, firstImage, intro } = rest;
-
+  const { campId, campName, firstImage, location, intro } = rest;
+  console.log(campName);
   return (
     <CardWrapper>
       <LinkWrapper href="/">
         <CardPhoto src="http://placehold.it/50x50" alt="test" />
         <CardBody>
-          <CardTitle>진주 캠핑소사이어티 럭셔리글램핑&피크닉</CardTitle>
-          <p>
-            <span>구래 성지캠핑장</span>
-            <span>4,000원</span>
-          </p>
-          <Comments>캠핑로그(20)</Comments>
-          <Info>
-            <li>환경 : 숲</li>
+          <CardTitle>{campName}</CardTitle>
+          <CardDescription>{intro}</CardDescription>
+          <CardComments>캠핑로그(20)</CardComments>
+          <CardTag>
+            <li>환경 : {location.environment}</li>
             <li>태그 : 킹왕짱</li>
-          </Info>
+          </CardTag>
         </CardBody>
       </LinkWrapper>
     </CardWrapper>
@@ -41,7 +38,7 @@ const CardPhoto = styled.img`
   min-width: 6.75rem;
   min-height: 6.75rem;
 `;
-const CardBody = styled.a`
+const CardBody = styled.div`
   display: block;
   text-decoration: none;
   background-color: #fff;
@@ -55,11 +52,16 @@ const CardTitle = styled.h3`
   padding: 5px 0px;
 `;
 
-const Comments = styled.span`
-  display: block;
+const CardDescription = styled.p`
+  margin: 5px 0;
 `;
 
-const Info = styled.ul`
+const CardComments = styled.span`
+  display: block;
+  margin: 5px 0;
+`;
+
+const CardTag = styled.ul`
   display: flex;
   gap: 5px;
 `;

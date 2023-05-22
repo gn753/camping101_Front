@@ -1,41 +1,36 @@
 import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
-import CampingEtcInfo from "./components/CampingEtcInfo";
-import CampingLog from "./components/CampingLog";
-import CampingSiteInfo from "./components/CampingSiteInfo";
-import CampingSiteIntro from "./components/CampingSiteIntro";
-import CampingSiteSelect from "./components/CampingSiteSelect";
+import CampLogList from "./components/DetailsCampLogList";
+import CampReservation from "./components/DetailsCampReservation";
+import CampDescription from "./components/DetailsCampDescription";
+import CampBanner from "./components/DetailsCampBanner";
+import CampTitle from "./components/DetailsCampTitle";
 
-export default function CampingSiteDetails() {
+export default function CampingSiteDetails({ campDetails }: any) {
+  const sites = campDetails.siteInCampList;
+  const camplogs = campDetails.campLogInCampList;
+
   return (
     <Wrapper>
+      <CampBanner />
       <Container>
-        <Figure />
-        <CampingSiteInfo />
-        <CampingSiteIntro />
-        <CampingEtcInfo />
-        <CampingSiteSelect />
-        <CampingLog />
+        <CampTitle campDetails={campDetails} />
+        <CampDescription intro={campDetails.intro} />
+        <CampReservation campSites={sites} />
+        <CampLogList camplogs={camplogs} />
       </Container>
     </Wrapper>
-  );
-}
-
-function Figure() {
-  return (
-    <section>
-      <img src="http://placehold.it/1024x150" alt="test" />
-    </section>
   );
 }
 
 const Wrapper = styled.div`
   section {
     padding: 20px 10px;
-    border-bottom: 1px solid black;
+  }
+  section:nth-of-type(1) {
+    border-bottom: 0;
   }
   h3 {
-    margin-bottom: 30px;
-    max-width: 80%;
+    margin-bottom: 11px;
   }
 `;

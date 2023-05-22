@@ -28,7 +28,7 @@ export async function getServerSideProps({ query, res }: any) {
   const dynamicPath = url + id;
   const response = await axiosSetting.get(dynamicPath);
   const details = await response.data;
-  console.log(details, "details");
+
   return {
     props: { details },
   };

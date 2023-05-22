@@ -1,25 +1,33 @@
 import styled from "@emotion/styled";
 import Container from "components/layouts/Container";
-import DetailsPhoto from "./components/DetailsPhoto";
-import DetailsBody from "./components/DetailsBody";
-import DetailsHeader from "./components/DetailsHeader";
-import DetailsComment from "./components/DetailsComment/DetailsCommet";
+import DetailsCampLogBody from "./components/DetailsCampLogBody";
+import DetailsCampLogHeader from "./components/DetailsCampLogHeader";
+import DetailsComment from "./components/DetailsComment";
+import DetailsCampLogPhoto from "./components/DetailsCampLogPhoto";
 import { CampLogDetailsResponse } from "./types";
-import { useState } from "react";
+
 import Hr from "components/base/Hr";
+import DetailsCampLogBookmark from "./components/DetailsCampLogBookmark";
 
 interface Props {
   details: CampLogDetailsResponse;
 }
+const CampLogDetailsState = {
+  key: "CampLogDetailsState",
+  default: null,
+};
 
 export default function CampLogDetails({ details }: Props) {
   return (
     <Wrapper>
-      <DetailsPhoto />
+      <DetailsCampLogPhoto image={details.image} />
       <Container>
-        <DetailsHeader details={details} />
+        {details && <DetailsCampLogHeader details={details} />}
+        {details && (
+          <DetailsCampLogBookmark title={details.title} like={details.like} />
+        )}
         <Hr />
-        {details && <DetailsBody details={details} />}
+        {details && <DetailsCampLogBody details={details} />}
         <DetailsComment />
       </Container>
     </Wrapper>

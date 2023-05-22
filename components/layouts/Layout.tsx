@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 import { ReactNode } from "types";
 
 type LayoutProps = {
@@ -20,5 +21,5 @@ export default function Layout({ header, footer, main }: LayoutProps) {
 const Main = styled.main`
   position: relative;
   min-height: calc(100% - 250px);
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 0 1rem 0;
 `;

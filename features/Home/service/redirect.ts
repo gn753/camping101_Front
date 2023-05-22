@@ -1,4 +1,4 @@
-import { authService } from "features/common/authService";
+import authService from "features/common/authService";
 import { useRouter } from "next/router";
 
 export default function redirect() {

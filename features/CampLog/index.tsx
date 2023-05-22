@@ -1,39 +1,46 @@
 import styled from "@emotion/styled";
 import CampLogCard from "features/CampLog/components/CampLogCard";
-import Pagination from "components/Pagination";
-export default function CampLog() {
+import { CampLogResponse } from "./types";
+import Container from "components/layouts/Container";
+import nanoid from "features/common/utils/nanoid";
+import Link from "next/link";
+
+interface Props {
+  camplogs: CampLogResponse[];
+}
+
+export default function CampLog({ camplogs }: Props) {
+  const renderCamplogList = () => {
+    return (
+      <>
+        {camplogs.map((camplog) => (
+          <Link href={`/campLog/details/${camplog.campLogId}`} key={nanoid()}>
+            <CampLogCard {...camplog} />
+          </Link>
+        ))}
+      </>
+    );
+  };
+
   return (
-    <>
-      <Wrapper>
+    <Wrapper>
+      <Container>
+        <Title>캠프 리뷰</Title>
         <CountDiv>전체 {"1,200"}</CountDiv>
-        <CampLogCard />
-        <CampLogCard />
-        <CampLogCard />
-        <CampLogCard />
-        <CampLogCard />
-        <Pagination />
-      </Wrapper>
-    </>
+        <CampLogList>{renderCamplogList()}</CampLogList>
+      </Container>
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 1024px;
   margin: auto;
+  width: 100%;
 `;
 
-const TopDiv = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-const BottomDiv = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-const ContentDiv = styled.div`
-  width: 300px;
+const Title = styled.h2`
+  font-size: 26px;
+  margin: 1.75rem 0 2.5rem;
 `;
 
 const CountDiv = styled.div`
@@ -42,58 +49,14 @@ const CountDiv = styled.div`
   margin: 30px 0;
 `;
 
-const ImgBox = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: silver;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
-
-const TitleDiv = styled.div`
-  width: 300px;
-  height: auto;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  border: 1px solid black;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-`;
-
-const WriterDiv = styled.div`
-  border: 1px solid black;
-  width: 100px;
-  margin: 5px 100px;
-  font-size: 14px;
+const CampLogList = styled.div`
   display: flex;
-  justify-content: sapce-between;
-  cursor: pointer;
-`;
-
-const WriterImg = styled.img`
-  width: 15px;
-  height: 15px;
-  border: 1px solid black;
-  border-radius: 15px;
-`;
-
-const WriterText = styled.div`
-  width: 70px;
-  margin-left: 10px;
-  font-size: 14px;
-  line-height: 17px;
-`;
-
-const WriterCreated = styled.div`
-  margin-top: 5px;
-  margin-bottom: 30px;
-  margin-left: 120px;
-  margin-right: 120px;
-  font-size: 14px;
-  border: 1px solid black;
-  width: auto;
+  flex-wrap: wrap;
+  gap: 10px;
+  article {
+    margin-bottom: 10px;
+  }
+  article:last-of-type {
+    margin-bottom: 0;
+  }
 `;

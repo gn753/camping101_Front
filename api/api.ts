@@ -1,4 +1,6 @@
 import axios from "axios";
+import authService from "features/common/authService";
+
 export const axiosSetting = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -8,14 +10,16 @@ export const axiosSetting = axios.create({
 
 axiosSetting.defaults.withCredentials = true;
 
-// axiosSetting.interceptors.request.use(function (config): any {
-//   config.headers[
-//     "access_token"
-//   ] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzaWduVXBUeXBlIjoiRU1BSUwiLCJtZW1iZXJUeXBlIjoiQ1VTVE9NRVIiLCJleHAiOjE2ODkzMjk3NTUsImVtYWlsIjoidGVzdDFAbmF2ZXIuY29tIiwibWVtYmVySWQiOjl9.i_NJQTUCespLGbhPXFFR04G1QEF9NGo19RVrhpb0Pw0`;
-//   config.headers[
-//     "refresh_token"
-//   ] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzaWduVXBUeXBlIjoiRU1BSUwiLCJtZW1iZXJUeXBlIjoiQ1VTVE9NRVIiLCJleHAiOjE2ODkzMjk3NTUsImVtYWlsIjoidGVzdDFAbmF2ZXIuY29tIiwibWVtYmVySWQiOjl9.i_NJQTUCespLGbhPXFFR04G1QEF9NGo19RVrhpb0Pw0`;
-//   config.headers["Content-Type"] = `application/json`;
+const { isTokenValidOrUndefined, getJwtToken } = authService();
 
-//   return config;
-// });
+//액세스 토큰 요청
+axiosSetting.interceptors.request.use(
+  (config) => {
+    const token = getJwtToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);

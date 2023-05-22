@@ -1,4 +1,3 @@
-import { RealTimeCampLogDetails } from "../types";
 export const data = [
   {
     image: "http://placehold.it/500x300",
