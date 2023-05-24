@@ -3,9 +3,9 @@ import { SiteInCampList } from "../types";
 import getAvailableCampSite from "../service/getAvailableCampStie";
 
 interface AvailableSites {
-  endDate: moment.Moment;
+  endDate: string;
   reservationId: number;
-  startDate: moment.Moment;
+  startDate: string;
 }
 
 interface Props {
@@ -22,13 +22,15 @@ export default function useFindAvailableCampSite({
   ); // 예약가능한 캠핑장 데이터 날짜
 
   useEffect(() => {
-    if (!typeof window !== undefined) {
+    if (!typeof window !== undefined && siteInCampList) {
       const findResv = siteInCampList.reservationInSiteList.find(
         (예약데이터: any) =>
           예약데이터 && getAvailableCampSite(selectedCalendarDates, 예약데이터),
       );
 
-      setAvailableSites(findResv);
+      if (findResv) {
+        setAvailableSites(findResv);
+      }
     }
   }, [selectedCalendarDates]);
   return { availableSites };
