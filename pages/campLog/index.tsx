@@ -2,15 +2,32 @@ import Layout from "components/layouts/Layout";
 import Header from "components/layouts/Header";
 import Footer from "components/layouts/Footer";
 import CampLog from "features/CampLog";
+import { axiosSetting } from "api/api";
+import { CampLogResponse } from "features/CampLog/types";
 
-export default function CampLogPage() {
+interface Props {
+  camplogs: CampLogResponse[];
+}
+
+export default function CampLogPage({ camplogs }: Props) {
   return (
     <>
       <Layout
         header={<Header />}
-        main={<CampLog />}
+        main={<CampLog camplogs={camplogs} />}
         footer={<Footer />}
-      ></Layout>
+      />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const url = `${process.env.BASE_URL}/camplog/`;
+  const response = await axiosSetting.get(url);
+  const camplogs = response.data.campLogs;
+  return {
+    props: {
+      camplogs,
+    },
+  };
 }

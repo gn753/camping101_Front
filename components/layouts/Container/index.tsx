@@ -8,6 +8,6 @@ export default function Container({ children }: ReactNode) {
 }
 
 const Wrapper = styled.div`
-  width: 1024px;
+  max-width: 768px;
   margin: auto;
 `;

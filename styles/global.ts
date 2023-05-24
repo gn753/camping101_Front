@@ -112,11 +112,10 @@ export const global = css`
     height: 100%; /* ✔️ Height on the parent will fix this issue. */
   }
   body {
-    margin-top: 50px;
   }
   html,
   body,
-  body > div:first-child,
+  body > div:nth-of-type(1),
   div#__next,
   div#__next > div {
     height: 100%;

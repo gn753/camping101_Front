@@ -31,6 +31,12 @@
       "@styles/*": ["/styles/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next.config.js",
+    "app.js"
+  ],
   "exclude": ["node_modules"]
 }

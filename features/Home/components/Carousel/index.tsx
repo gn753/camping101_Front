@@ -1,17 +1,9 @@
 import styled from "@emotion/styled";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { RealTimeCampLogDetails, CampinSiteDetails } from "features/Home/types";
+import { useLayoutEffect, useState } from "react";
+import { CampLogDetails, CampSiteDetails } from "features/Home/types";
 import { useRef } from "react";
 import CarouselControls from "./CarouselControls";
 import CarouselItem from "./CarouselItem";
-
-interface Props {
-  slidesPerView?: number; // 몇개의 슬라이드를 보여줄것인가
-  slideMargin?: number; // 슬라이드의 마진은?
-  sectionWidth?: number; // 슬라이드 섹션의 너비는?
-  data: RealTimeCampLogDetails[];
-  CarouselItem: React.ReactNode;
-}
 
 interface CarouselProps {
   slideType: "캠프로그" | "캠핑장";
@@ -47,21 +39,23 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
       <CarouselInner>
         <CarouselContent slideMoveX={slideMoveX}>
           {slideType === "캠핑장" &&
-            slides.map((slide: CampinSiteDetails, index: number) => (
+            slides.map((slide: CampSiteDetails, index: number) => (
               <CarouselItem
                 title={slide.campName}
                 image={slide.firstImage}
                 id={slide.campId}
                 key={index}
+                link={`/camp/details/${slide.campId}`}
               />
             ))}
           {slideType === "캠프로그" &&
-            slides.map((slide: RealTimeCampLogDetails, index: number) => (
+            slides.map((slide: CampLogDetails, index: number) => (
               <CarouselItem
                 title={slide.title}
                 image={slide.image}
                 id={slide.campLogId}
                 key={index}
+                link={`/campLog/details/${slide.campLogId}`}
               />
             ))}
         </CarouselContent>
@@ -73,10 +67,14 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
 
 const Wrapper = styled.section`
   position: relative;
-  max-width: 1024px;
+  width: 100%;
+  max-width: 768px;
   overflow: hidden;
 `;
-
+const CarouselContent = styled.div<CarouselContentProps>`
+  transform: ${(props) => `translateX(${-props.slideMoveX}px)`};
+  transition: 0.5s;
+`;
 const CarouselInner = styled.div`
   margin: 0px auto;
   box-sizing: border-box;
@@ -91,8 +89,3 @@ const CarouselInner = styled.div`
 interface CarouselContentProps {
   slideMoveX: number;
 }
-
-const CarouselContent = styled.div<CarouselContentProps>`
-  transform: ${(props) => `translateX(${-props.slideMoveX}px)`};
-  transition: 0.5s;
-`;

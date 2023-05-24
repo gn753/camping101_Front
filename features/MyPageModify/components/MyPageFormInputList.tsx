@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 
-import FormInputFiledText from "components/Form/FormInputFieldText";
 export default function MyPageFormInputList({ register }: any) {
   return (
     <>

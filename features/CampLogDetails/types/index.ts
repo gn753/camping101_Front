@@ -51,3 +51,13 @@ export interface CampLogDetailsComments {
   like: number;
   createdAt: string;
 }
+
+export interface RecrusiveComments extends CampLogDetailsComments {
+  children?: RecrusiveComments[];
+}
+
+export interface Bookmark {
+  
+}
+
+

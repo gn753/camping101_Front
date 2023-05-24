@@ -1,11 +1,11 @@
-export interface RealTimeCampLogList {
+export interface CampLogList {
   total: number;
   pageNumber: number;
   recordSize: number;
   campLogs: [];
 }
 
-export interface RealTimeCampLogDetails {
+export interface CampLogDetails {
   campLogId: number;
   writerEmail: string;
   writerNickName: string;
@@ -27,7 +27,7 @@ export interface RealTimeCampLogDetails {
   updatedAt: null;
 }
 
-export interface CampinSiteDetails {
+export interface CampSiteDetails {
   animalCapable: string;
   campId: 0;
   campName: string;

@@ -1,43 +1,49 @@
 import styled from "@emotion/styled";
+import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
 import { AuthState } from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 
-useCallback;
-
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(AuthState);
+  const { memberInfo } = useMemberInfo();
 
   const removeToken = useCallback(() => {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("refresh_token");
   }, []);
 
-  const handleLgout = useCallback(async () => {
+  const handleLgout = useCallback(() => {
     removeToken();
     setIsLoggedIn(false);
-  }, []);
-
+  }, [removeToken, setIsLoggedIn]);
   return (
     <HeaderWrapper>
       <Gnb>
         <GnbList>
           <Link href="/">캠핑 101 로고</Link>
-          <Link href="/campingSite">캠핑장</Link>
+          <Link href="/camp">캠핑장</Link>
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
           {isLoggedIn ? (
             <>
-              <Link href="/myPage">마이페이지</Link>
+              <Link href="/myPage">
+                <Profile>
+                  <i>프로필</i>
+                  <span>{memberInfo && memberInfo.nickname}님</span>
+                </Profile>
+              </Link>
               <Link href="/signIn">
                 <button onClick={handleLgout}>로그아웃</button>
               </Link>
             </>
           ) : (
             <>
-              <Link href="/signIn">로그인</Link>
+              <Link href="/signIn">
+                <i>아이콘</i>로그인
+              </Link>
               <Link href="/signUp">회원가입</Link>
             </>
           )}
@@ -48,12 +54,13 @@ export default function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 999;
   border: 1px solid #eee;
+  background-color: #fff;
 `;
 
 const Gnb = styled.nav`
@@ -79,6 +86,32 @@ const GnbList = styled.div`
     color: black;
   }
   button {
+    display: flex;
+    align-items: center;
     font-size: 16px;
+    vertical-align: middle;
+  }
+  i {
+    display: inline-block;
+    background-image: url("/icons/log_in.svg");
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+  }
+`;
+
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+
+  i {
+    display: inline-block;
+    background-image: url("/icons/user-default.png");
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    font-size: 0;
+    margin-right: 5px;
   }
 `;

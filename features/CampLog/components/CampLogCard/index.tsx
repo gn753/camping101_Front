@@ -1,32 +1,33 @@
 import styled from "@emotion/styled";
+import { CampLogResponse } from "features/CampLog/types";
+import formatPostDate from "features/common/utils/monent/formatPostDate";
 
-export default function CampLogCard() {
+export default function CampLogCard({ ...data }: CampLogResponse) {
+  const { writerNickName, title, description, createdAt } = data;
   return (
     <CardWrapper>
       <CardFigure src="http://placehold.it/400x300" />
       <CardBody>
-        <CardTitle>온수수영장에 아이들 놀곳</CardTitle>
-        <CardDescritpion>
-          온수수영장에 아이들 놀곳이 많아 신나게 놀고왔어요. 저녁에 해주시는
-          콘서트도 감성돋는 시간이었네요. 두분 모두 어찌나 노래를 잘하시는지…
-        </CardDescritpion>
+        <CardTitle>{title}</CardTitle>
+        <CardDescritpion>{description}</CardDescritpion>
         <CardFooter>
-          <CardWriter>
-            <WriterImg />
-            <span>작성자</span>
-          </CardWriter>
-          <CardWriterCreated>25분 전</CardWriterCreated>
+          <CardUserInfo>
+            <i>유저프로필</i>
+            <span>{writerNickName}</span>
+          </CardUserInfo>
+          <CardUserCreated>{formatPostDate(createdAt)}</CardUserCreated>
         </CardFooter>
       </CardBody>
     </CardWrapper>
   );
 }
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.article`
   display: flex;
+  flex-basis: calc(50% - 10px); /* 가로로 2개씩 쌓기 */
   gap: 20px;
-  width: 100%;
   height: 100px;
+  overflow: hidden;
 `;
 
 const CardFigure = styled.img`
@@ -38,15 +39,15 @@ const CardFigure = styled.img`
 
 const CardBody = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 const CardTitle = styled.h3`
-  width: 500px;
+  display: block;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 10px;
-  border: 1px solid black;
-  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -55,7 +56,7 @@ const CardTitle = styled.h3`
 
 const CardDescritpion = styled.p`
   display: block;
-  width: 500px;
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,20 +68,22 @@ const CardFooter = styled.footer`
   width: 100%;
 `;
 
-const CardWriter = styled.div`
+const CardUserInfo = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
   cursor: pointer;
-  border: 1px solid black;
   font-size: 14px;
-`;
-const CardWriterCreated = styled.div`
-  font-size: 14px;
+  i {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    background-image: url("/icons/user-default.png");
+    background-size: contain;
+    font-size: 0;
+  }
 `;
 
-const WriterImg = styled.img`
-  width: 15px;
-  height: 15px;
-  border: 1px solid black;
-  border-radius: 15px;
+const CardUserCreated = styled.div`
+  font-size: 14px;
 `;

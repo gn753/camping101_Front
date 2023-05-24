@@ -34,8 +34,8 @@ export default function useLogin() {
       .post(url, data)
       .then((res) => {
         console.log(res, "토큰확인요");
-        const accesToken = tokenWithoutBearer(res.headers.access_token);
-        const refreshToken = tokenWithoutBearer(res.headers.refresh_token);
+        const accesToken = tokenWithoutBearer(res.headers["access-token"]);
+        const refreshToken = tokenWithoutBearer(res.headers["refresh-token"]);
         setJwtToken(accesToken);
         setIsLogin(true);
         setRefreshToken(refreshToken);
