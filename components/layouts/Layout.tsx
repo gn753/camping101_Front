@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { ReactNode } from "types";
 
 type LayoutProps = {
-  header?: ReactNode;
+  header: ReactNode;
   main: ReactNode;
-  footer?: ReactNode;
+  footer: ReactNode;
 };
 
 export default function Layout({ header, footer, main }: LayoutProps) {

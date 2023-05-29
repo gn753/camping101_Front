@@ -16,7 +16,7 @@ export default function CampLogBookmarkOnOff({ title, like }: Props) {
 
   const memberId = memberInfo && memberInfo.member_id;
   const router = useRouter();
-
+  const id = Number(router.query.id);
   const newBookmark = {
     campLogId: router.query.id,
     title: title,
@@ -28,14 +28,14 @@ export default function CampLogBookmarkOnOff({ title, like }: Props) {
       getBookmarks(memberId);
     }
   }, [getBookmarks, memberId]);
-  const bookmarkId = bookmarkList.find((it) => it.campLogId == router.query.id);
+  const bookmarkId = bookmarkList.find((it) => it.campLogId === id);
 
   useEffect(() => {
     if (bookmarkId) {
       setIsBookmark(true);
     }
   }, [bookmarkId]);
-  console.log(bookmarkList, "List");
+
   return (
     <>
       {!isBookmark ? (

@@ -20,7 +20,7 @@ export default function CampLogCard({ ...data }: any) {
           <CardUserCreated>{formatPostDate(createdAt)}</CardUserCreated>
         </CardFooter>
       </CardBody>
-      <CardDelete onClick={() => deleteBookmarks(bookMarkId)} />
+      <CardDelete onClick={() => deleteBookmarks(bookMarkId)} role="button" />
     </CardWrapper>
   );
 }

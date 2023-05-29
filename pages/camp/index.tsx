@@ -3,10 +3,14 @@ import Header from "components/layouts/Header";
 import Footer from "components/layouts/Footer";
 import { axiosSetting } from "api/api";
 import Camp from "features/Camp";
+import Head from "next/head";
 
 export default function CampPage({ camps }: any) {
   return (
     <>
+      <Head>
+        <title>캠핑장 페이지</title>
+      </Head>
       <Layout
         header={<Header />}
         main={<Camp camps={camps} />}

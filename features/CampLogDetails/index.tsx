@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
+import Hr from "components/base/Hr";
 import Container from "components/layouts/Container";
 import DetailsCampLogBody from "./components/CampLogBody";
-import Hr from "components/base/Hr";
 import CampLogBookmarkOnOff from "./components/CampLogBookmarkOnOff";
 import CampLogWriterProfile from "./components/CampLogWriterProfile";
 import { CampLogDetailsResponse } from "./types";
 import CampLogPhoto from "./components/CampLogPhoto";
 import Comment from "./components/Comment";
+
 interface Props {
   details: CampLogDetailsResponse;
 }

@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import MyPageButton from "components/Button/Button";
+import { useForm } from "react-hook-form";
 import MyPageFormInputList from "./MyPageFormInputList";
 import MyPageTitle from "./MyPageTitle";
-import { useForm } from "react-hook-form";
 
-interface useFormProps {
+interface FormProps {
   memberType: string;
   signUpType: string;
   name: string;
@@ -15,7 +14,7 @@ interface useFormProps {
   file: [];
 }
 export default function MyPageForm() {
-  const { register, handleSubmit } = useForm<useFormProps>({
+  const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",
     defaultValues: {
       memberType: "CUSTOMER",

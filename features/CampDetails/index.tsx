@@ -6,7 +6,11 @@ import CampDescription from "./components/CampDescription";
 import CampBanner from "./components/CampBanner";
 import CampTitle from "./components/CampTitle";
 
-export default function CampDetails({ campDetails }: any) {
+interface Props<T> {
+  campDetails: T;
+}
+
+export default function CampDetails<T>({ campDetails }: any) {
   const sites = campDetails.siteInCampList;
   const camplogs = campDetails.campLogInCampList;
 

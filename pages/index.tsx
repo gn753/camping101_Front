@@ -5,12 +5,13 @@ import Footer from "components/layouts/Footer";
 import Home from "features/Home";
 import { axiosSetting } from "api/api";
 import { CampLogDetails, CampSiteDetails } from "features/Home/types";
+
 interface Props {
   camplogs: CampLogDetails[];
   campsites: CampSiteDetails[];
 }
 
-function HomePage({ camplogs, campsites }: any) {
+function HomePage<T>({ camplogs, campsites }: Props) {
   return (
     <>
       <Head>d</Head>

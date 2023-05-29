@@ -3,17 +3,22 @@ import { useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import fetchCommnetCreate from "features/CampLogDetails/service/fetchCommnetCreate";
 import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
-import useComments from "features/CampLogDetails/hooks/useCommnets";
+import useComments from "features/CampLogDetails/hooks/useComments";
 
-interface useFormProps {
+interface FormProps {
   commentContent: string;
   closeCommentReply?: () => void;
 }
 
-export default function CommentCreate({ campLogId, closeCommentReply }: any) {
+export default function CommentCreate({
+  parentId,
+  content,
+  campLogId,
+  closeCommentReply,
+}: any) {
   const userInfo = useRecoilValue(MemberInfoState);
   const { getComments } = useComments();
-  const { register, handleSubmit } = useForm<useFormProps>({
+  const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",
     defaultValues: {
       commentContent: "",
@@ -21,19 +26,25 @@ export default function CommentCreate({ campLogId, closeCommentReply }: any) {
   });
 
   const onSubmit = async (data: any) => {
-    if (userInfo) {
-      const { email, member_id } = userInfo;
+    if (!userInfo) return null;
+    const { email, member_id } = userInfo;
+    if (!parentId && !closeCommentReply) {
       const params = {
         campLogId, //캠프로그 아이
         content: data.commentContent,
-        reCommentYn: false,
         writerEmail: email,
         parendId: 0,
       };
-      const response = await fetchCommnetCreate(params);
-      if (response) {
-        getComments(member_id);
-      }
+      await fetchCommnetCreate(params);
+      await getComments(member_id);
+    }
+    if (parentId && closeCommentReply) {
+      const params = {
+        campLogId, //캠프로그 아이
+        content: data.commentContent,
+        writerEmail: email,
+        parendId: parentId,
+      };
     }
   };
 

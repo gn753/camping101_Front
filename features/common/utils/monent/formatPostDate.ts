@@ -9,13 +9,14 @@ const formatPostDate = (date: string) => {
 
   if (diffInDays > 30) {
     return postDate.format("MMM D");
-  } else if (diffInDays >= 1) {
-    return `${diffInDays}일 전`;
-  } else if (diffInHours >= 1) {
-    return `${diffInHours}시간 전`;
-  } else {
-    return `${diffInMinutes}분 전`;
   }
+  if (diffInDays >= 1) {
+    return `${diffInDays}일 전`;
+  }
+  if (diffInHours >= 1) {
+    return `${diffInHours}시간 전`;
+  }
+  return `${diffInMinutes}분 전`;
 };
 
 export default formatPostDate;

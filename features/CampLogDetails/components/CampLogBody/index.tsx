@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { CampLogDetailsResponse } from "features/CampLogDetails/types";
+import nanoid from "features/common/utils/nanoid";
 
 interface Props {
   details: CampLogDetailsResponse;
@@ -8,29 +9,27 @@ interface Props {
 export default function CampLogBody({ details }: Props) {
   const { visitedAt, recTags, visitedWith, description } = details;
   return (
-    <>
-      <section>
-        <div>
-          <Introduce>
-            <strong>XXXX ZZZZ사이트</strong>
-            <ul>
-              <li>날짜 : {visitedAt}</li>
-              <li>인원 : {visitedWith}</li>
-              <li>
-                추천태그 :
-                {recTags.map((tag, index) => (
-                  <span key={index}>{tag}</span>
-                ))}
-              </li>
-            </ul>
-          </Introduce>
-        </div>
-        <Editor>
-          <strong>에디터 소개</strong>
-          <p>{description}</p>
-        </Editor>
-      </section>
-    </>
+    <section>
+      <div>
+        <Introduce>
+          <strong>XXXX ZZZZ사이트</strong>
+          <ul>
+            <li>날짜 : {visitedAt}</li>
+            <li>인원 : {visitedWith}</li>
+            <li>
+              추천태그 :
+              {recTags.map((tag, index) => (
+                <span key={nanoid()}>{tag}</span>
+              ))}
+            </li>
+          </ul>
+        </Introduce>
+      </div>
+      <Editor>
+        <strong>에디터 소개</strong>
+        <p>{description}</p>
+      </Editor>
+    </section>
   );
 }
 

@@ -11,13 +11,11 @@ interface Props {
 
 export default function CampLogPage({ camplogs }: Props) {
   return (
-    <>
-      <Layout
-        header={<Header />}
-        main={<CampLog camplogs={camplogs} />}
-        footer={<Footer />}
-      />
-    </>
+    <Layout
+      header={<Header />}
+      main={<CampLog camplogs={camplogs} />}
+      footer={<Footer />}
+    />
   );
 }
 

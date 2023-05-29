@@ -1,68 +1,55 @@
 import styled from "@emotion/styled";
 import { useForm } from "react-hook-form";
-import fetchCommentPut from "features/CampLogDetails/service/fetchCommentput";
-import { RecrusiveComments } from "features/CampLogDetails/types";
-import useComments from "features/CampLogDetails/hooks/useCommnets";
 import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
 import { useRouter } from "next/router";
+import useComments from "features/CampLogDetails/hooks/useComments";
 
-interface useFormProps {
+interface FormProps {
   commentContent: string;
 }
 
 interface Props {
-  comment: RecrusiveComments;
+  comment: any;
   closeCommentPut: () => void;
 }
 
 interface Request {
   campLogId: any;
-  requesterEmail: string;
-  commentId: number;
   content: string;
+  commentId: any;
 }
 
 export default function CommentPut({ comment, closeCommentPut }: Props) {
-  const { comments, putComment } = useComments();
+  const { putComment, getComments } = useComments();
   const { memberInfo } = useMemberInfo();
   const { commentId, content } = comment;
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm<useFormProps>({
+  const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",
     defaultValues: {
       commentContent: content,
     },
   });
 
-  const onSubmit = async (data: useFormProps) => {
+  const onSubmit = async (data: FormProps) => {
     if (memberInfo) {
       const params: Request = {
         campLogId: router.query.id,
-        requesterEmail: memberInfo && memberInfo.email,
-        commentId: commentId,
         content: data.commentContent,
+        commentId,
       };
 
-      const response = await fetchCommentPut(params);
-
-      if (response) {
-        closeCommentPut();
-        putComment(
-          router.query.id,
-          commentId,
-          data.commentContent,
-          memberInfo.email,
-        );
-      }
+      await putComment(params);
+      closeCommentPut();
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CommentInputWrapper>
-        <i>아이콘</i>
-        <input
+        <Profile>아이콘</Profile>
+        <Description
           {...register("commentContent")}
           placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:) "
         />
@@ -73,48 +60,32 @@ export default function CommentPut({ comment, closeCommentPut }: Props) {
 }
 
 const CommentInputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 20px;
-  i {
-    width: 30px;
-    height: 30px;
-    font-size: 0px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("http://placeimg.com/30/30/any");
-    border-radius: 30px;
-  }
-  input {
-    width: 70%;
-  }
+  position: relative;
 `;
-const ContentBotton = styled.div`
-  display: flex;
-  gap: 20px;
-  width: 100%;
+const Profile = styled.div`
+  position: absolute;
+  top: 0px;
+  left: -42px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("http://placeimg.com/30/30/any");
+  font-size: 0;
 `;
 
-const CommemtDelete = styled.i`
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("/icons/block.svg");
-  right: 25px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0;
+const Description = styled.input`
+  width: calc(100% - 100px - 40px);
+  padding: 10px 3px;
 `;
 
 const Button = styled.button`
   all: unset;
   width: 100px;
   border: 1px solid black;
+  padding: 10px 3px;
   text-align: center;
   cursor: pointer;
   box-sizing: border-box;

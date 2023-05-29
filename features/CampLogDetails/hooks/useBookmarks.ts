@@ -1,8 +1,8 @@
 import { atom, useRecoilState } from "recoil";
 import { useCallback } from "react";
+import fetchMyBookmarks from "features/MyPage/api/fetchMyBookmarks";
 import fetchBookmarkCreate from "../service/fetchBookmarkCreate";
 import fetchBookmarkDelete from "../service/fetchBookmarkDelete";
-import fetchMyBookmarks from "features/MyPage/api/fetchMyBookmarks";
 
 interface BookmarkAddData {
   campLogId: any;
@@ -36,24 +36,21 @@ export default function useBookmarks() {
     [setBookmarkList],
   );
 
-  const addBookmarks = useCallback(
-    async (newBookmark: BookmarkAddData) => {
-      const response = await fetchBookmarkCreate(newBookmark);
-    },
-    [setBookmarkList],
-  );
+  const addBookmarks = useCallback(async (newBookmark: BookmarkAddData) => {
+    await fetchBookmarkCreate(newBookmark);
+  }, []);
 
   const deleteBookmarks = async (bookmarkId: any) => {
-    if (bookmarkId) {
-      await fetchBookmarkDelete(bookmarkId)
-        .then((res) => console.log(res, "성공"))
-        .catch((err) => console.log(err));
+    if (bookmarkId) return null;
+    await fetchBookmarkDelete(bookmarkId)
+      .then((res) => console.log(res, "성공"))
+      .catch((err) => console.log(err));
 
-      const update = bookmarkList.filter(
-        (bookmark) => bookmark.bookMarkId !== bookmarkId,
-      );
-      setBookmarkList(update);
-    }
+    const update = bookmarkList.filter(
+      (bookmark) => bookmark.bookMarkId !== bookmarkId,
+    );
+    setBookmarkList(update);
+    return null;
   };
 
   return {

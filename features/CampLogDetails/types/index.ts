@@ -20,44 +20,50 @@ export interface CampLogDetailsResponse {
   writerNickName: string;
 }
 
-export interface CampLogDetailsCommentResponse {
+export interface Comments {
   campLogId: number;
-  total: number;
-  pageNumber: number;
-  recordSize: number;
   comments: [
     {
       commentId: number;
+      content: string;
+      createdAt: string;
+      profileImagePath: string;
       writerEmail: string;
       writerNickName: string;
-      profileImagePath: string;
-      parentId: number;
-      reCommentYn: boolean;
-      content: string;
-      like: number;
-      createdAt: string;
+      reComments: [
+        {
+          content: string;
+          createdAt: string;
+          like: number;
+          profileImagePath: string;
+          reCommentId: number;
+          writerEmail: string;
+          writerNickName: string;
+        },
+      ];
     },
   ];
+  pageNumber: number;
+  recordSize: number;
+  total: number;
 }
 
-export interface CampLogDetailsComments {
+export interface ICommentParent {
   commentId: number;
+  content: string;
+  createdAt: string;
+  profileImagePath: string;
   writerEmail: string;
   writerNickName: string;
-  profileImagePath: string;
-  parentId: number;
-  reCommentYn: boolean;
+  reComments: [];
+}
+
+export interface ReComment {
   content: string;
-  like: number;
   createdAt: string;
+  like: number;
+  profileImagePath: string;
+  reCommentId: number;
+  writerEmail: string;
+  writerNickName: string;
 }
-
-export interface RecrusiveComments extends CampLogDetailsComments {
-  children?: RecrusiveComments[];
-}
-
-export interface Bookmark {
-  
-}
-
-

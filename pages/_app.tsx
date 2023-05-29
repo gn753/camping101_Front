@@ -1,5 +1,4 @@
-import { Global } from "@emotion/react";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider, Global } from "@emotion/react";
 import { RecoilRoot } from "recoil";
 import type { AppProps } from "next/app";
 import { global } from "styles/global";

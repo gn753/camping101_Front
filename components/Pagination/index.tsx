@@ -1,29 +1,40 @@
 import styled from "@emotion/styled";
 import nanoid from "features/common/utils/nanoid";
+import { Dispatch, SetStateAction } from "react";
 
-export default function Pagination({ total, limit, page, setPage }: any) {
+interface Props<T extends (p: number) => number> {
+  total: number;
+  limit: number;
+  page: ReturnType<T>;
+  setPage: Dispatch<SetStateAction<number>>;
+}
+
+export default function Pagination<T extends (p: number) => number>({
+  total,
+  limit,
+  page,
+  setPage,
+}: Props<T>) {
   const numPages = Math.ceil(total / limit);
 
   return (
-    <>
-      <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
-          &lt;
+    <Nav>
+      <Button onClick={() => setPage(page)} disabled={page === 1}>
+        &lt;
+      </Button>
+      {Array.from({ length: numPages }).map((_, i) => (
+        <Button
+          key={nanoid()}
+          onClick={() => setPage(i + 1)}
+          data-page={page === i + 1 ? "page" : "none"}
+        >
+          {i + 1}
         </Button>
-        {Array.from({ length: numPages }).map((_, i) => (
-          <Button
-            key={nanoid()}
-            onClick={() => setPage(i + 1)}
-            aria-current={page === i + 1 ? "page" : null}
-          >
-            {i + 1}
-          </Button>
-        ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
-          &gt;
-        </Button>
-      </Nav>
-    </>
+      ))}
+      <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        &gt;
+      </Button>
+    </Nav>
   );
 }
 
@@ -50,15 +61,14 @@ const Button = styled.button`
     transform: translateY(-2px);
   }
 
-  &[disabled] {
-    background: grey;
+  &[data-page="page"] {
+    background: deeppink;
+    font-weight: bold;
     cursor: revert;
     transform: revert;
   }
-
-  &[aria-current] {
-    background: deeppink;
-    font-weight: bold;
+  &[data-page="none"] {
+    background: grey;
     cursor: revert;
     transform: revert;
   }

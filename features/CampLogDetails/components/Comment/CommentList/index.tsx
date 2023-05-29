@@ -1,16 +1,6 @@
 import styled from "@emotion/styled";
-
-import {
-  CampLogDetailsComments,
-  RecrusiveComments,
-} from "features/CampLogDetails/types";
 import nanoid from "features/common/utils/nanoid";
-import createCommentTree from "features/CampLogDetails/service/createCommentTree";
-import CommentItem from "./CommentItem";
-
-interface Props {
-  comments: CampLogDetailsComments[];
-}
+import CommentParent from "./CommentParent";
 
 export default function CommentList({ comments, start, end }: any) {
   if (!comments || comments.length === 0) {
@@ -18,15 +8,12 @@ export default function CommentList({ comments, start, end }: any) {
   }
 
   const renderCommentList = () => {
-    const copyComments = JSON.parse(JSON.stringify(comments));
-    const commentTree = createCommentTree(copyComments);
-    console.log(commentTree, "tree");
     return (
-      <>
-        {commentTree.slice(start, end).map((comment: RecrusiveComments) => (
-          <CommentItem {...comment} key={nanoid()} />
+      <ul>
+        {comments.slice(start, end).map((comment: any) => (
+          <CommentParent {...comment} key={nanoid()} />
         ))}
-      </>
+      </ul>
     );
   };
 

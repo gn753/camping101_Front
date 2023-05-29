@@ -10,7 +10,7 @@ interface Props {
   sign_up_type: string;
 }
 
-export const MemberInfoState = atom<null |Props>({
+export const MemberInfoState = atom<null | Props>({
   key: "MemberInfoState",
   default: {
     email: "",

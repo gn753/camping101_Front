@@ -4,7 +4,6 @@ interface CommentPostRequset {
   campLogId: string | string[] | undefined;
   parendId?: number;
   content: string;
-  reCommentYn: boolean;
   writerEmail: string;
 }
 

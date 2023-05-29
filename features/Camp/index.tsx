@@ -1,13 +1,12 @@
-import Container from "components/layouts/Container";
+import styled from "@emotion/styled";
 import CampingSiteList from "./components/CampList";
 import CampingSiteTitle from "./components/CampTitle";
-import styled from "@emotion/styled";
 
-interface Props {
-  camps: any;
+interface Props<T> {
+  camps: T[];
 }
 
-export default function Camp({ camps }: Props) {
+export default function Camp<T>({ camps }: Props<T>) {
   return (
     <Wrapper>
       <CampingSiteTitle />

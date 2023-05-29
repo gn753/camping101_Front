@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import useComments from "features/CampLogDetails/hooks/useCommnets";
+import { ICommentParent } from "features/CampLogDetails/types";
 import fetchComments from "features/CampLogDetails/service/fetchComments";
+import useComments from "features/CampLogDetails/hooks/useComments";
+import Pagination from "components/Pagination";
 import CommentList from "./CommentList";
 import CommentCreate from "./CommentCreate";
-import Pagination from "components/Pagination";
 
 export default function Comment() {
   const [page, setPage] = useState(1);
@@ -13,17 +14,16 @@ export default function Comment() {
   const offset = (page - 1) * limit;
 
   const router = useRouter();
-  const id = router.query.id;
+  const { id } = router.query;
 
   useEffect(() => {
-    const getComments = async () => {
-      const response = await fetchComments(id);
-      if (response) {
-        setComments(response.data.comments);
-      }
-    };
-
     if (typeof window !== "undefined") {
+      const getComments = async () => {
+        const response = await fetchComments(Number(id));
+        const data: ICommentParent[] = response.data.comments;
+        setComments(data);
+      };
+
       getComments();
     }
   }, [id, setComments]);
@@ -34,7 +34,7 @@ export default function Comment() {
       <CommentCreate campLogId={id} />
       <CommentList comments={comments} start={offset} end={offset + limit} />
       <Pagination
-        total={comments.length}
+        total={comments ? comments.length : 0}
         limit={limit}
         page={page}
         setPage={setPage}

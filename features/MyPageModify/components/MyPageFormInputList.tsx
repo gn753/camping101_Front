@@ -4,24 +4,24 @@ export default function MyPageFormInputList({ register }: any) {
   return (
     <>
       <FormInputTextFiled>
-        <label>닉네임</label>
-        <Input {...register("name")} />
+        <label htmlFor="닉네임">닉네임</label>
+        <Input id="닉네임" {...register("name")} />
       </FormInputTextFiled>
       <FormInputTextFiled>
-        <label>프로필</label>
-        <Input type="file" {...register("file")} />
+        <label htmlFor="프로필">프로필</label>
+        <Input id="프로필" type="file" {...register("file")} />
       </FormInputTextFiled>
       <FormInputTextFiled>
-        <label>이메일</label>
-        <Input {...register("email")} />
+        <label htmlFor="이메일">이메일</label>
+        <Input id="이메일" {...register("email")} />
       </FormInputTextFiled>
       <FormInputTextFiled>
-        <label>패스워드</label>
-        <Input {...register("password")} />
+        <label htmlFor="패스워드">패스워드</label>
+        <Input id="패스워드" {...register("password")} />
       </FormInputTextFiled>
       <FormInputTextFiled>
-        <label>연락처</label>
-        <Input {...register("phone")} />
+        <label htmlFor="연락처">연락처</label>
+        <Input id="연락처" {...register("phone")} />
       </FormInputTextFiled>
       <Button>
         <span>수정하기</span>
@@ -29,13 +29,6 @@ export default function MyPageFormInputList({ register }: any) {
     </>
   );
 }
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-`;
 
 const FormInputTextFiled = styled.div`
   display: flex;

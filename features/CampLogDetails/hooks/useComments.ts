@@ -1,55 +1,41 @@
-import { useEffect } from "react";
-import { atom, selector, useRecoilState } from "recoil";
+import { axiosSetting } from "api/api";
+import { atom, useRecoilState } from "recoil";
 import fetchComments from "../service/fetchComments";
 import fetchCommentPut from "../service/fetchCommentput";
-import fetchBookmarkDelete from "../service/fetchBookmarkDelete";
-import { axiosSetting } from "api/api";
-const CommentsState = atom<any>({
+import { ICommentParent } from "../types";
+
+const CommentsState = atom<ICommentParent[] | null>({
   key: "CommentListState",
   default: [],
-});
-
-const commentSelector = selector({
-  key: "commentSelector",
-  get: ({ get }) => {
-    return get(CommentsState); // 댓글 데이터 반환
-  },
-  set: ({ set }, updatedComment) => {
-    set(CommentsState, updatedComment); // 댓글 데이터 업데이트
-  },
 });
 
 export default function useComments() {
   const [comments, setComments] = useRecoilState(CommentsState);
 
-  const putComment = async (
-    camplogId: any,
-    commentId: any,
-    content: any,
-    requesterEmail: any,
-  ) => {
-    const response = await fetchCommentPut({
-      camplogId,
-      commentId,
-      content,
-      requesterEmail,
-    });
-  };
-
-  const getComments = async (memberId: any) => {
-    const response = await fetchComments(memberId);
-
-    if (response) {
-      setComments(response.data.comments); // 새로운 댓글로 댓글 데이터 업데이트
+  const getComments = async (campLogId: number | string) => {
+    try {
+      const response = await fetchComments(campLogId);
+      const data: ICommentParent[] = response.data.comments;
+      setComments(data); // 새로운 댓글로 댓글 데이터 업데이트
+    } catch (error) {
+      console.log(error, "getComments 댓글에러입니다");
     }
   };
 
-  const deleteComment = async (commentId: any) => {
-    const updatedComments = comments.filter(
-      (comment: { commentId: any }) => comment.commentId !== commentId,
-    );
+  const putComment = async (data: any) => {
+    const { campLogId, commentId, content } = data;
+    await fetchCommentPut({
+      campLogId,
+      commentId,
+      content,
+    });
+    await getComments(campLogId);
+  };
+
+  const deleteComment = async (commentId: number) => {
+    if (!comments) return null;
     await axiosSetting.delete(`/api/camplog/comment/${commentId}`);
-    setComments(updatedComments); // 삭제된 댓글로 댓글 데이터 업데이트
+    return null;
   };
 
   return { comments, setComments, getComments, putComment, deleteComment };

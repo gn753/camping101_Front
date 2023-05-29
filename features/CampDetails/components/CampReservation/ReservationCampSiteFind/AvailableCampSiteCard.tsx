@@ -38,9 +38,8 @@ export default function AvailableCampSiteCard({
         payment: price,
         humanCapacity: 1,
       };
-      console.log(postData, "post");
-      const response = await axiosSetting.post("/api/reservation", postData);
-      console.log(response, "예약응답");
+
+      await axiosSetting.post("/api/reservation", postData);
     }
   };
 

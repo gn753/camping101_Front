@@ -1,10 +1,10 @@
 import { axiosSetting } from "api/api";
 
-const url = "api/camplog/comment";
-
 const fetchCommentPut = async (data: any) => {
-  const response = await axiosSetting.put("/api/camplog/comment", {
-    ...data,
+  const { campLogId, content, commentId } = data;
+  const response = await axiosSetting.put(`/api/camplog/comment/${commentId}`, {
+    campLogId,
+    content,
   });
   return response;
 };

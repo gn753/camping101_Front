@@ -1,10 +1,11 @@
 import { axiosSetting } from "api/api";
+
 const url = "/api/camplog/comment";
 
-const fetchComments = async (campLogId: string | string[] | undefined) => {
+const fetchComments = async (campLogId: number | string) => {
   const response = await axiosSetting.get(url, {
     params: {
-      campLogId: campLogId,
+      campLogId,
     },
   });
   return response;
