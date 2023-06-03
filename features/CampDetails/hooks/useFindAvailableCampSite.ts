@@ -30,8 +30,12 @@ export default function useFindAvailableCampSite({
 
       if (findResv) {
         setAvailableSites(findResv);
+      } else {
+        setAvailableSites(null);
       }
     }
-  }, [selectedCalendarDates]);
+
+    return () => setAvailableSites(null);
+  }, [selectedCalendarDates, siteInCampList]);
   return { availableSites };
 }

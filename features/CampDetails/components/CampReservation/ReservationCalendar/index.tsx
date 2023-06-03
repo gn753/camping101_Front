@@ -32,7 +32,9 @@ export default function ReservationCalendar() {
   const getSelectedDatesPeriod = () => {
     const isRender = selectedCalendarDates.length > 0;
     const startDate = moment(selectedCalendarDates[0]).format("YYYY년 M월 D일");
-    const endDate = moment(selectedCalendarDates[1]).format("YYYY년 M월 D일");
+    const endDate = moment(
+      selectedCalendarDates[selectedCalendarDates.length - 1],
+    ).format("YYYY년 M월 D일");
     const result = isRender && `${startDate} - ${endDate}`;
 
     return result;

@@ -1,58 +1,75 @@
 import { useRouter } from "next/router";
-import { axiosSetting } from "api/api";
+import { axiosSetting, setAuthorizationHeader } from "api/api";
 import { useRecoilState, atom } from "recoil";
+import { useCallback } from "react";
 
-export const AuthState = atom<boolean>({
-  key: "AuthState",
-  default: false,
+interface Props {
+  isLogin: boolean;
+  accessToken: string;
+}
+
+export const IsAuthState = atom<Props | null>({
+  key: "IsAuthState",
+  default: null,
+  effects_UNSTABLE: [
+    ({ onSet }) => {
+      onSet((newData) => {
+        if (newData) {
+          setAuthorizationHeader(newData?.accessToken);
+        }
+      });
+    },
+  ],
 });
+
 const url = "/api/signin/mail";
 
-interface useFormProps {
+interface FormProps {
   email: string;
   password: string;
 }
 
 export default function useLogin() {
-  const [isLogin, setIsLogin] = useRecoilState(AuthState);
+  const [isLogin, setIsLogin] = useRecoilState(IsAuthState);
   const router = useRouter();
-  //로그인 전송
 
   function tokenWithoutBearer(token: string) {
     return token.replace("Bearer ", "");
   }
 
   function setJwtToken(token: string) {
-    sessionStorage.setItem("jwt", token);
+    sessionStorage.setItem("access-token", token);
   }
   function setRefreshToken(token: string) {
-    return sessionStorage.setItem("refresh_token", token);
+    return sessionStorage.setItem("refresh-token", token);
   }
 
-  const getLoginToken = async (data: useFormProps) => {
+  const getLoginToken = async (data: FormProps) => {
     await axiosSetting
       .post(url, data)
       .then((res) => {
-        console.log(res, "토큰확인요");
-        const accesToken = tokenWithoutBearer(res.headers["access-token"]);
+        const accessToken = tokenWithoutBearer(res.headers["access-token"]);
         const refreshToken = tokenWithoutBearer(res.headers["refresh-token"]);
-        setJwtToken(accesToken);
-        setIsLogin(true);
+        setIsLogin({ accessToken, isLogin: true });
+        setJwtToken(accessToken);
         setRefreshToken(refreshToken);
         router.push("/");
-        console.log(res, "res");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // 로그인이 200상태이면  전역상태로 처리
-
-  //로그인 에러 처리
+  const updateLogin = useCallback(
+    (accessToken: string, loginState: boolean) => {
+      setIsLogin({ accessToken, isLogin: loginState });
+    },
+    [setIsLogin],
+  );
 
   return {
     isLogin,
     getLoginToken,
+    updateLogin,
   };
 }

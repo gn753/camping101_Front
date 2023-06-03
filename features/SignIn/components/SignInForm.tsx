@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
-import GoogleSubmit from "./GoogleSubmit";
 import { useForm } from "react-hook-form";
-import { axiosSetting } from "api/api";
+import GoogleSubmit from "./GoogleSubmit";
 import useLogin from "../hooks/useLogin";
 
 const url = "/api/signin/mail";
 
-interface useFormProps {
+interface FormProps {
   email: string;
   password: string;
 }
@@ -17,7 +16,7 @@ export default function SignInForm() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<useFormProps>({
+  } = useForm<FormProps>({
     mode: "onSubmit",
     defaultValues: {
       email: "",
@@ -25,7 +24,7 @@ export default function SignInForm() {
     },
   });
 
-  const onSubmit = async (data: useFormProps) => {
+  const onSubmit = async (data: FormProps) => {
     await getLoginToken(data);
   };
 

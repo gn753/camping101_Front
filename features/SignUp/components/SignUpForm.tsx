@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import MemberType from "./MemberType";
-import SignUpType from "./SignUpType";
 import { useForm } from "react-hook-form";
 import { axiosSetting } from "api/api";
 import { useRouter } from "next/router";
+import MemberType from "./MemberType";
+import SignUpType from "./SignUpType";
 
 const url = "api/signup/mail";
 
-interface useFormProps {
+interface FormProps {
   memberType: string;
   signUpType: string;
   name: string;
@@ -22,7 +22,7 @@ interface useFormProps {
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const { register, handleSubmit } = useForm<useFormProps>({
+  const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",
     defaultValues: {
       memberType: "CUSTOMER",
@@ -88,7 +88,7 @@ export default function SignUpForm() {
           <label>연락처</label>
           <Input {...register("phone")} />
         </FormInputTextFiled>
-        <Button disabled={isLoading ? true : false}>
+        <Button disabled={isLoading}>
           <span>회원가입하기</span>
         </Button>
       </Form>

@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-//next js hydrate html상 에러 aㅅ
-export default function CampItem({ ...rest }: any) {
+
+export default function CampCard({ ...rest }: any) {
   const { campId, campName, firstImage, location, intro } = rest;
-  console.log(campName);
+
   return (
     <CardWrapper>
-      <LinkWrapper href="/">
-        <CardPhoto src="http://placehold.it/50x50" alt="test" />
+      <LinkWrapper href={`/camp/details/${campId}`}>
+        <CardPhoto src={firstImage} alt="샘플이미지" />
         <CardBody>
           <CardTitle>{campName}</CardTitle>
           <CardDescription>{intro}</CardDescription>
@@ -23,10 +23,11 @@ export default function CampItem({ ...rest }: any) {
 }
 
 const CardWrapper = styled.article`
-  margin: 1.25rem 0;
+  display: flex;
   flex-basis: 48%;
-  border-top-left-radius: calc(0.375rem - 1px);
-  border-top-right-radius: calc(0.375rem - 1px);
+  gap: 20px;
+  height: 100px;
+  overflow: hidden;
   cursor: pointer;
 `;
 

@@ -31,11 +31,14 @@ export default function CalendarMonth({ monthDates, month }: Props) {
         selectedCalendarDates[selectedCalendarDates.length - 1],
       );
       const isAdjacent = moment(date).diff(prevSelectedDate, "days") === 1;
-      const maxNumberSelectables = selectedCalendarDates.length <= 1;
+      const maxNumberSelectables = selectedCalendarDates.length < 7;
 
       if (isAdjacent && maxNumberSelectables) {
         // 인접한 날짜가 맞고 예약갯수가 7개 이하면 추가
-        setSelectedCalendarDates((pre) => [...pre, date]);
+        const sortData = [...selectedCalendarDates, date];
+        const resbDate = sortData.sort(compareDates);
+
+        setSelectedCalendarDates(resbDate);
       } else {
         // 인접한 날짜가 아니면 이전에 선택한 날짜들 모두 취소
         setSelectedCalendarDates([date, date]);
@@ -94,3 +97,16 @@ const Blank = styled.div`
   line-height: 40px;
   text-align: center;
 `;
+
+function compareDates(a: string, b: string): number {
+  const dateA = new Date(a);
+  const dateB = new Date(b);
+
+  if (dateA < dateB) {
+    return -1;
+  }
+  if (dateA > dateB) {
+    return 1;
+  }
+  return 0;
+}

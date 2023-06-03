@@ -3,12 +3,12 @@ import useBookmarks from "features/CampLogDetails/hooks/useBookmarks";
 import formatPostDate from "features/common/utils/monent/formatPostDate";
 
 export default function CampLogCard({ ...data }: any) {
-  const { nickName, title, description, createdAt, bookMarkId } = data;
+  const { nickName, title, description, createdAt, bookMarkId, image } = data;
   const { deleteBookmarks } = useBookmarks();
 
   return (
     <CardWrapper>
-      <CardFigure src="http://placehold.it/400x300" />
+      <CardFigure src={image} />
       <CardBody>
         <CardTitle>{title}</CardTitle>
         <CardDescritpion>{description}</CardDescritpion>

@@ -14,7 +14,9 @@ interface Props {
 function HomePage<T>({ camplogs, campsites }: Props) {
   return (
     <>
-      <Head>d</Head>
+      <Head>
+        <title>캠핑 101 페이지</title>
+      </Head>
       <Layout
         header={<Header />}
         footer={<Footer />}

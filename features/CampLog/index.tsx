@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import CampLogCard from "features/CampLog/components/CampLogCard";
-import { CampLogResponse } from "./types";
 import Container from "components/layouts/Container";
 import nanoid from "features/common/utils/nanoid";
 import Link from "next/link";
 import { useState } from "react";
 import Pagination from "components/Pagination";
+import { CampLogResponse } from "./types";
 
 interface Props {
   camplogs: CampLogResponse[];
@@ -15,7 +15,7 @@ export default function CampLog({ camplogs }: Props) {
   const [page, setPage] = useState(1);
   const limit = 3;
   const offset = (page - 1) * limit;
-  
+
   const renderCamplogList = () => {
     return (
       <>
@@ -32,7 +32,7 @@ export default function CampLog({ camplogs }: Props) {
     <Wrapper>
       <Container>
         <Title>캠프 리뷰</Title>
-        <CountDiv>전체 {"1,200"}</CountDiv>
+        <CountDiv>전체 1,200</CountDiv>
         <CampLogList>{renderCamplogList()}</CampLogList>
         <Pagination
           total={camplogs.length}
@@ -65,6 +65,9 @@ const CampLogList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  a {
+    flex-basis: 48%;
+  }
   article {
     margin-bottom: 10px;
   }

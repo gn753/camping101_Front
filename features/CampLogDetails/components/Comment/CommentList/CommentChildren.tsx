@@ -12,7 +12,8 @@ interface Props {
 
 export default function CommentChildren({ reComment }: Props) {
   const [isPut, setIsPut] = useState(false);
-  const { deleteComment } = useComments();
+  const [isReply, setIsReply] = useState(false);
+  const { deleteReComment } = useComments();
   const { memberInfo } = useMemberInfo();
   const { content, createdAt, reCommentId, writerEmail, writerNickName } =
     reComment;
@@ -24,7 +25,9 @@ export default function CommentChildren({ reComment }: Props) {
   };
 
   const 본인확인 = !!(memberInfo && memberInfo.email === writerEmail);
-
+  const handleIsReply = () => {
+    setIsReply(!isReply);
+  };
   return (
     <Wrapper>
       <Parent>
@@ -38,13 +41,14 @@ export default function CommentChildren({ reComment }: Props) {
           {본인확인 && (
             <Button role="button" onClick={handleIsPut} data-name="수정하기" />
           )}
+          {본인확인 && (
+            <Button
+              role="button"
+              onClick={() => deleteReComment(reCommentId)}
+              data-name="삭제하기"
+            />
+          )}
         </Footer>
-        {본인확인 && (
-          <Delete
-            data-name="댓글 삭제"
-            onClick={() => deleteComment(reCommentId)}
-          />
-        )}
       </Parent>
       {isPut && (
         <CommentPut comment={reComment} closeCommentPut={handleIsPut} />

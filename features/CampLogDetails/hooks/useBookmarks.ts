@@ -41,10 +41,8 @@ export default function useBookmarks() {
   }, []);
 
   const deleteBookmarks = async (bookmarkId: any) => {
-    if (bookmarkId) return null;
-    await fetchBookmarkDelete(bookmarkId)
-      .then((res) => console.log(res, "성공"))
-      .catch((err) => console.log(err));
+    if (!bookmarkId) return null;
+    await fetchBookmarkDelete(bookmarkId);
 
     const update = bookmarkList.filter(
       (bookmark) => bookmark.bookMarkId !== bookmarkId,

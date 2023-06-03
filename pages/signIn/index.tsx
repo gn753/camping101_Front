@@ -5,7 +5,9 @@ import Head from "next/head";
 export default function SignInPage() {
   return (
     <>
-      <Head>dㄴ</Head>
+      <Head>
+        <title>로그인 페이지</title>
+      </Head>
       <ResetLayout main={<SignIn />} />;
     </>
   );

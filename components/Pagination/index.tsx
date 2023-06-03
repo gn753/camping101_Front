@@ -1,25 +1,20 @@
 import styled from "@emotion/styled";
 import nanoid from "features/common/utils/nanoid";
-import { Dispatch, SetStateAction } from "react";
+import { SetStateAction, Dispatch } from "react";
 
-interface Props<T extends (p: number) => number> {
+interface Props {
   total: number;
   limit: number;
-  page: ReturnType<T>;
+  page: number;
   setPage: Dispatch<SetStateAction<number>>;
 }
 
-export default function Pagination<T extends (p: number) => number>({
-  total,
-  limit,
-  page,
-  setPage,
-}: Props<T>) {
+export default function Pagination({ total, limit, page, setPage }: Props) {
   const numPages = Math.ceil(total / limit);
 
   return (
     <Nav>
-      <Button onClick={() => setPage(page)} disabled={page === 1}>
+      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
         &lt;
       </Button>
       {Array.from({ length: numPages }).map((_, i) => (

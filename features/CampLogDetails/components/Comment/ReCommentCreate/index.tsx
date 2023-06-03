@@ -1,22 +1,16 @@
 import styled from "@emotion/styled";
-import { useForm } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import fetchCommnetCreate from "features/CampLogDetails/service/fetchCommnetCreate";
-import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
-import useComments from "features/CampLogDetails/hooks/useComments";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import fetchReCommentCreate from "features/CampLogDetails/service/fetchReCommentCreate";
+import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import useComments from "features/CampLogDetails/hooks/useComments";
 
 interface FormProps {
   commentContent: string;
-  closeCommentReply?: () => void;
 }
 
-export default function CommentCreate({
-  parentId,
-  campLogId,
-  closeCommentReply,
-}: any) {
-  const userInfo = useRecoilValue(MemberInfoState);
+export default function ReCommentCreate({ parentId, closeComment }: any) {
+  const { memberInfo } = useMemberInfo();
   const { getComments } = useComments();
   const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",
@@ -25,18 +19,22 @@ export default function CommentCreate({
     },
   });
   const router = useRouter();
+  const campLogId = router.query.id;
 
   const onSubmit = async (data: any) => {
-    if (!userInfo) return null;
-    if (!parentId && !closeCommentReply) {
-      const params = {
-        campLogId: router.query.id,
-        content: data.commentContent,
-      };
+    if (!memberInfo) return null;
+    const params = {
+      campLogId,
+      content: data.commentContent,
+      parentId: parentId.toString(),
+    };
 
-      await fetchCommnetCreate(params);
-
-      await getComments(router.query.id);
+    try {
+      await fetchReCommentCreate(params);
+      await getComments(campLogId);
+      closeComment();
+    } catch (error) {
+      console.log(error);
     }
   };
 

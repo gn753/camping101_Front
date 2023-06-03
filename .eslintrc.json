@@ -42,6 +42,8 @@
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "no-return-assign": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {

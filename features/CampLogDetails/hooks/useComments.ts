@@ -3,6 +3,7 @@ import { atom, useRecoilState } from "recoil";
 import fetchComments from "../service/fetchComments";
 import fetchCommentPut from "../service/fetchCommentput";
 import { ICommentParent } from "../types";
+import { useRouter } from "next/router";
 
 const CommentsState = atom<ICommentParent[] | null>({
   key: "CommentListState",
@@ -11,8 +12,9 @@ const CommentsState = atom<ICommentParent[] | null>({
 
 export default function useComments() {
   const [comments, setComments] = useRecoilState(CommentsState);
-
-  const getComments = async (campLogId: number | string) => {
+  const router = useRouter();
+  const campLogId = router.query.id;
+  const getComments = async (campLogId: any) => {
     try {
       const response = await fetchComments(campLogId);
       const data: ICommentParent[] = response.data.comments;
@@ -34,9 +36,35 @@ export default function useComments() {
 
   const deleteComment = async (commentId: number) => {
     if (!comments) return null;
-    await axiosSetting.delete(`/api/camplog/comment/${commentId}`);
+    try {
+      await axiosSetting.delete(`/api/camplog/comment/${commentId}`);
+      const filteredComments = comments.filter(
+        (comment) => comment.commentId !== commentId,
+      );
+      setComments(filteredComments);
+    } catch {
+      return null;
+    }
     return null;
   };
 
-  return { comments, setComments, getComments, putComment, deleteComment };
+  const deleteReComment = async (commentId: number) => {
+    if (!comments) return null;
+    try {
+      await axiosSetting.delete(`/api/camplog/recomment/${commentId}`);
+      await getComments(campLogId);
+    } catch {
+      return null;
+    }
+    return null;
+  };
+
+  return {
+    comments,
+    setComments,
+    getComments,
+    putComment,
+    deleteComment,
+    deleteReComment,
+  };
 }

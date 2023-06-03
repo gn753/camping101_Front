@@ -3,10 +3,10 @@ import { CampLogResponse } from "features/CampLog/types";
 import formatPostDate from "features/common/utils/monent/formatPostDate";
 
 export default function CampLogCard({ ...data }: CampLogResponse) {
-  const { writerNickName, title, description, createdAt } = data;
+  const { writerNickName, title, description, createdAt, image } = data;
   return (
     <CardWrapper>
-      <CardFigure src="http://placehold.it/400x300" />
+      <CardFigure src={image} />
       <CardBody>
         <CardTitle>{title}</CardTitle>
         <CardDescritpion>{description}</CardDescritpion>

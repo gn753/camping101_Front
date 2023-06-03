@@ -14,6 +14,8 @@ export default function ReservationCampSiteFind({ siteInCampList }: Props) {
     siteInCampList,
     selectedCalendarDates,
   });
+  console.log(availableSites, "availableSites");
+  console.log(selectedCalendarDates, " selectedCalendarDates");
   return (
     <AvailableCampSiteCard
       key={nanoid()}

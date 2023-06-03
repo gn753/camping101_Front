@@ -37,6 +37,6 @@
     "**/*.tsx",
     "next.config.js",
     "app.js"
-  ],
+, "features/CampLogDetails/service/fetchRecommentCreatets"  ],
   "exclude": ["node_modules"]
 }

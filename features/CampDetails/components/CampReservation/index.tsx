@@ -12,7 +12,7 @@ export default function CampReservation({ campSites }: Props) {
   const renderCampSiteList = () => {
     const isRender = campSites && campSites.length > 0;
 
-    if (isRender) {
+    if (!isRender) {
       return null;
     }
 

@@ -1,25 +1,26 @@
 import { decode } from "jsonwebtoken";
+import { useCallback } from "react";
 
 export default function authService() {
   const getJwtToken = () => {
     if (typeof window !== "undefined") {
-      return sessionStorage.getItem("jwt");
+      return sessionStorage.getItem("access-token");
     }
   };
 
   const setJwtToken = (token: string) => {
-    sessionStorage.setItem("jwt", token);
+    sessionStorage.setItem("access-token", token);
   };
   const getHeaders = () => {
     const headers: HeadersInit = {};
     const token = getJwtToken();
-    if (token) headers["access_token"] = `Bearer ${token}`;
+    if (token) headers["access-token"] = `Bearer ${token}`;
 
     return headers;
   };
-  //리프레시 토큰을 얻는다
+
   const getRefreshToken = () => {
-    return sessionStorage.getItem("refresh_token");
+    return sessionStorage.getItem("refresh-token");
   };
 
   const decodeJWT = (token: string) => {

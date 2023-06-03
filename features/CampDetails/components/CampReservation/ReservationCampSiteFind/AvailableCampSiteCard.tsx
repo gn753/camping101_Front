@@ -4,6 +4,10 @@ import Image from "next/image";
 import { axiosSetting } from "api/api";
 import { SiteInCampList } from "features/CampDetails/types";
 import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import useIsSelectedDates from "features/CampDetails/hooks/useIsSelectedDates";
+import { useState } from "react";
+import Loading from "components/Loadging";
+import { useRouter } from "next/router";
 
 interface Post {
   siteId: number;
@@ -23,23 +27,32 @@ export default function AvailableCampSiteCard({
   campSite,
   availableSites,
 }: Props) {
-  const { name, checkIn, checkOut, price } = campSite;
+  const { name, checkIn, checkOut, price, siteId } = campSite;
   const { memberInfo } = useMemberInfo();
+  const { selectedCalendarDates } = useIsSelectedDates();
+  const [isLoading, setIsLoading] = useState(false);
   const checkIndate = moment(checkIn).format("h");
   const checkOutdate = moment(checkOut).format("h");
 
-  const onSubmit = async () => {
-    if (memberInfo) {
-      const postData: Post = {
-        siteId: 4,
-        startDate: "2023-07-07T15:54:16",
-        endDate: "2023-07-08T15:53:52",
-        memberId: 9,
-        payment: price,
-        humanCapacity: 1,
-      };
-
-      await axiosSetting.post("/api/reservation", postData);
+  const postData = {
+    startDate: selectedCalendarDates[0],
+    endDate: selectedCalendarDates[selectedCalendarDates.length - 1],
+    humanCapacity: 1,
+    memberId: memberInfo?.member_id,
+    payment: price,
+    siteId,
+  };
+  const url = "/api/reservation";
+  const router = useRouter();
+  const postCampResv = async () => {
+    setIsLoading(true);
+    try {
+      await axiosSetting.post(url, postData);
+      setIsLoading(false);
+      alert("예약이 완료됐습니다");
+      router.push("/myPage");
+    } catch {
+      setIsLoading(false);
     }
   };
 
@@ -67,15 +80,15 @@ export default function AvailableCampSiteCard({
         </CardDetails>
 
         {availableSites && (
-          <Button onClick={onSubmit} isActive={availableSites}>
-            예약하기
+          <Button
+            onClick={postCampResv}
+            isActive={availableSites}
+            disabled={!!isLoading}
+          >
+            {!isLoading ? <span> 예약하기</span> : <Loading size="sm" />}
           </Button>
         )}
-        {!availableSites && (
-          <Button onClick={onSubmit} disabled>
-            매진
-          </Button>
-        )}
+        {!availableSites && <Button disabled>매진</Button>}
       </CardContainer>
     </CardView>
   );
@@ -128,6 +141,9 @@ const CampPrice = styled.span`
 
 const Button = styled.button<any>`
   all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100px;
   border: 1px solid black;
   padding: 10px 3px;

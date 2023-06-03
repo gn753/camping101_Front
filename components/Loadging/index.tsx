@@ -9,14 +9,12 @@ export default function Loading({ size }: Props) {
   const md = 28 * 2;
   const lg = 28 * 3;
 
-  const sizeValue = `${size} === "sm" ? ${sm} : ${size} === "md" ? ${md} : ${lg}`;
-
-  return <Animation width={sizeValue} height={sizeValue} />;
+  return <Animation width={sm} height={sm} />;
 }
 
 interface StyleProps {
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 }
 
 const Animation = styled.div<StyleProps>`

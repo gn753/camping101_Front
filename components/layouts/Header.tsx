@@ -1,22 +1,22 @@
 import styled from "@emotion/styled";
 import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
-import { AuthState } from "features/SignIn/hooks/useLogin";
+import { IsAuthState } from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
 import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(AuthState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(IsAuthState);
   const { memberInfo } = useMemberInfo();
 
   const removeToken = useCallback(() => {
-    sessionStorage.removeItem("jwt");
-    sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("access-token");
+    sessionStorage.removeItem("refresh-token");
   }, []);
 
   const handleLgout = useCallback(() => {
     removeToken();
-    setIsLoggedIn(false);
+    setIsLoggedIn(null);
   }, [removeToken, setIsLoggedIn]);
   return (
     <HeaderWrapper>
@@ -27,7 +27,7 @@ export default function Header() {
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
         <GnbList>
-          {isLoggedIn ? (
+          {memberInfo ? (
             <>
               <Link href="/myPage">
                 <Profile>

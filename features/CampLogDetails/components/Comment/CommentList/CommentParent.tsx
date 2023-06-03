@@ -6,6 +6,9 @@ import { useState } from "react";
 import useComments from "features/CampLogDetails/hooks/useComments";
 import CommentPut from "./CommnetPut";
 import CommentChildren from "./CommentChildren";
+import CommentCreate from "../CommentCreate";
+import ReCommentCreate from "../ReCommentCreate";
+import nanoid from "features/common/utils/nanoid";
 
 export default function CommentParent({ ...comment }: ICommentParent) {
   const [isPut, setIsPut] = useState(false);
@@ -46,25 +49,29 @@ export default function CommentParent({ ...comment }: ICommentParent) {
           {본인확인 && (
             <Button role="button" onClick={handleIsPut} data-name="수정하기" />
           )}
-          {!본인확인 && reComments && (
+          {!본인확인 && (
             <Button
               role="button"
               onClick={handleIsReply}
               data-name="댓글달기"
             />
           )}
+          {본인확인 && (
+            <Button
+              role="button"
+              onClick={() => deleteComment(commentId)}
+              data-name="댓글삭제"
+            />
+          )}
         </Footer>
-        {본인확인 && (
-          <Delete
-            data-name="댓글 삭제"
-            onClick={() => deleteComment(commentId)}
-          />
-        )}
       </Parent>
+      {isReply && (
+        <ReCommentCreate parentId={commentId} closeComment={handleIsReply} />
+      )}
       {isPut && <CommentPut comment={comment} closeCommentPut={handleIsPut} />}
       {reComments.length > 0 &&
         reComments.map((reComment) => (
-          <CommentChildren reComment={reComment} />
+          <CommentChildren reComment={reComment} key={nanoid()} />
         ))}
     </Wrapper>
   );
