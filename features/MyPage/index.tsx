@@ -1,12 +1,15 @@
-import MyPageBookmark from "./components/MyPageBookmark";
 import Container from "components/layouts/Container";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import MyPageBookmark from "./components/MyPageBookmark";
+import CampResv from "./components/CampResv";
 
 export default function MyPage() {
   const [menu, setMenu] = useState(true);
-
+  const { memberInfo } = useMemberInfo();
+  const memberId = memberInfo?.member_id;
   return (
     <Wrapper>
       <Container>
@@ -20,7 +23,7 @@ export default function MyPage() {
             <li onClick={() => setMenu(false)}>내 예약 목록</li>
           </ul>
         </MenyWrapper>
-        {menu ? <MyPageBookmark /> : <div>예약목록</div>}
+        {menu ? <MyPageBookmark /> : <CampResv memberId={memberId} />}
       </Container>
     </Wrapper>
   );

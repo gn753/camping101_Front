@@ -20,9 +20,9 @@ interface Request {
 }
 
 export default function CommentPut({ comment, closeCommentPut }: Props) {
-  const { putComment, getComments } = useComments();
+  const { putReCommnet, putComment } = useComments();
   const { memberInfo } = useMemberInfo();
-  const { commentId, content } = comment;
+  const { commentId, content, reCommentId } = comment;
   const router = useRouter();
 
   const { register, handleSubmit } = useForm<FormProps>({
@@ -39,8 +39,14 @@ export default function CommentPut({ comment, closeCommentPut }: Props) {
         content: data.commentContent,
         commentId,
       };
+      if (commentId) {
+        await putComment(params);
+        closeCommentPut();
+      } else if (reCommentId) {
+        await putReCommnet(reCommentId, data.commentContent);
+        closeCommentPut();
+      }
 
-      await putComment(params);
       closeCommentPut();
     }
   };

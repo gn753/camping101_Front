@@ -58,6 +58,13 @@ export default function useComments() {
     }
     return null;
   };
+  const putReCommnet = async (commentId: number, content: string) => {
+    await axiosSetting.put(`/api/camplog/recomment/${commentId}`, {
+      campLogId,
+      content,
+    });
+    await getComments(campLogId);
+  };
 
   return {
     comments,
@@ -66,5 +73,6 @@ export default function useComments() {
     putComment,
     deleteComment,
     deleteReComment,
+    putReCommnet,
   };
 }
