@@ -82,7 +82,7 @@ const CardUserInfo = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 15px;
-    background-image: url("/icons/user-default.png");
+    background-image: url("/icons/user_default.svg");
     background-size: contain;
     font-size: 0;
   }

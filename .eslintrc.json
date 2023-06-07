@@ -44,6 +44,7 @@
     "@typescript-eslint/no-unsafe-argument": "off",
     "react/jsx-no-useless-fragment": "off",
     "no-return-assign": "off",
+    "consistent-return": "off",
     "jsx-a11y/label-has-associated-control": [
       2,
       {
