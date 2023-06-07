@@ -40,7 +40,7 @@ const UserProfile = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: url("http://placeimg.com/30/30/any");
+    background-image: url("/icons/user_default.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

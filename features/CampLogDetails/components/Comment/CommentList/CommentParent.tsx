@@ -4,11 +4,10 @@ import { ICommentParent } from "features/CampLogDetails/types";
 import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
 import { useState } from "react";
 import useComments from "features/CampLogDetails/hooks/useComments";
+import nanoid from "features/common/utils/nanoid";
 import CommentPut from "./CommnetPut";
 import CommentChildren from "./CommentChildren";
-import CommentCreate from "../CommentCreate";
 import ReCommentCreate from "../ReCommentCreate";
-import nanoid from "features/common/utils/nanoid";
 
 export default function CommentParent({ ...comment }: ICommentParent) {
   const [isPut, setIsPut] = useState(false);
@@ -93,7 +92,7 @@ const Profile = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url("http://placeimg.com/30/30/any");
+  background-image: url("/icons/user_default.svg");
   font-size: 0;
 `;
 

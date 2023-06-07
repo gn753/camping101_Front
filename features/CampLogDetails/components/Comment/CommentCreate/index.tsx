@@ -66,7 +66,7 @@ const CommentInputWrapper = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url("http://placeimg.com/30/30/any");
+    background-image: url("/icons/user_default.svg");
     border-radius: 30px;
   }
   input {
