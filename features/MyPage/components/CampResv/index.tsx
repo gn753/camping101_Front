@@ -33,7 +33,7 @@ export default function CampResv({ memberId }: any) {
       try {
         await axiosSetting.delete(`/api/reservation/${reservationId}`);
         const resvsfilter = resvs.filter(
-          (resv) => resv.reservationId !== reservationId,
+          (resv: any) => resv.reservationId !== reservationId,
         );
         setResvs(resvsfilter);
         alert("삭제되었습니다");
@@ -45,7 +45,7 @@ export default function CampResv({ memberId }: any) {
   );
   useEffect(() => {
     if (typeof window !== undefined && memberId) {
-      getResv(memberId);
+      getResv();
     }
   }, [getResv, memberId]);
 
