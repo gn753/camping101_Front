@@ -10,6 +10,14 @@ export default function MyPage() {
   const [menu, setMenu] = useState(true);
   const { memberInfo } = useMemberInfo();
   const memberId = memberInfo?.member_id;
+
+  const handleBookmarkOn = () => {
+    setMenu(true);
+  };
+  const handleCampResvOn = () => {
+    setMenu(false);
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -19,8 +27,12 @@ export default function MyPage() {
             <li>
               <Link href="/myPage/modify">회원정보 수정</Link>
             </li>
-            <li onClick={() => setMenu(true)}>북마크 목록</li>
-            <li onClick={() => setMenu(false)}>내 예약 목록</li>
+            <li>
+              <button onClick={handleBookmarkOn}>북마크 목록</button>
+            </li>
+            <li>
+              <button onClick={handleCampResvOn}>내 예약목록</button>
+            </li>
           </ul>
         </MenyWrapper>
         {menu ? <MyPageBookmark /> : <CampResv memberId={memberId} />}
