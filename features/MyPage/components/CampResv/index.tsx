@@ -4,13 +4,12 @@ import nanoid from "features/common/utils/nanoid";
 import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import Pagination from "components/Pagination";
+import usePagination from "components/Pagination/hooks/usePagination";
 
 export default function CampResv({ memberId }: any) {
-  const [page, setPage] = useState(1);
-  const limit = 3;
-  const offset = (page - 1) * limit;
   const [resvs, setResvs] = useState([]);
-
+  const { updatePagination, page, prevArrow, nextArrow, offset, limit } =
+    usePagination();
   const devideResvCancel = useCallback((resvStartDate: string) => {
     const currntDay = moment().format("YYYY-MM-DD");
     const isAdjacent = moment(resvStartDate).diff(currntDay, "days");
@@ -20,6 +19,7 @@ export default function CampResv({ memberId }: any) {
     }
     return null;
   }, []);
+
   const getResv = useCallback(async () => {
     const response = await axiosSetting.get(
       `/api/reservation/customer/${memberId}`,
@@ -77,7 +77,9 @@ export default function CampResv({ memberId }: any) {
         total={resvs.length}
         limit={limit}
         page={page}
-        setPage={setPage}
+        prevArrow={prevArrow}
+        nextArrow={nextArrow}
+        updatePagination={updatePagination}
       />
     </>
   );

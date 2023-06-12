@@ -1,17 +1,18 @@
-import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import useBookmarks from "features/CampLogDetails/hooks/useBookmarks";
 import CampLogCard from "components/Card/CampLogCard";
 import Pagination from "components/Pagination";
+import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
+import { useRecoilValue } from "recoil";
+import usePagination from "components/Pagination/hooks/usePagination";
+
 export default function MyPageBookmark() {
-  const [page, setPage] = useState(1);
-
-  const limit = 3;
-  const offset = (page - 1) * limit;
-
-  const { memberInfo } = useMemberInfo();
+  const memberInfo = useRecoilValue(MemberInfoState);
+  const { updatePagination, page, prevArrow, nextArrow, offset, limit } =
+    usePagination();
   const { getBookmarks, bookmarkList } = useBookmarks();
+
   useEffect(() => {
     const memberId = memberInfo?.member_id;
 
@@ -34,7 +35,9 @@ export default function MyPageBookmark() {
             total={bookmarkList.length}
             limit={limit}
             page={page}
-            setPage={setPage}
+            prevArrow={prevArrow}
+            nextArrow={nextArrow}
+            updatePagination={updatePagination}
           />
         </>
       ) : (

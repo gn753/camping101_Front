@@ -3,16 +3,15 @@ import nanoid from "features/common/utils/nanoid";
 import { useState } from "react";
 import Pagination from "components/Pagination";
 import CampCard from "./CampCard";
+import usePagination from "components/Pagination/hooks/usePagination";
 
 interface Props<T> {
   camps: T[];
 }
 
 export default function CampList<T>({ camps }: Props<T>) {
-  const [page, setPage] = useState(1);
-  const limit = 3;
-  const offset = (page - 1) * limit;
-
+  const { updatePagination, page, prevArrow, nextArrow, offset, limit } =
+    usePagination();
   return (
     <>
       <ListView>
@@ -24,7 +23,9 @@ export default function CampList<T>({ camps }: Props<T>) {
         total={camps.length}
         limit={limit}
         page={page}
-        setPage={setPage}
+        prevArrow={prevArrow}
+        nextArrow={nextArrow}
+        updatePagination={updatePagination}
       />
     </>
   );

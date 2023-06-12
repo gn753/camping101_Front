@@ -3,18 +3,17 @@ import CampLogCard from "features/CampLog/components/CampLogCard";
 import Container from "components/layouts/Container";
 import nanoid from "features/common/utils/nanoid";
 import Link from "next/link";
-import { useState } from "react";
 import Pagination from "components/Pagination";
 import { CampLogResponse } from "./types";
+import usePagination from "components/Pagination/hooks/usePagination";
 
 interface Props {
   camplogs: CampLogResponse[];
 }
 
 export default function CampLog({ camplogs }: Props) {
-  const [page, setPage] = useState(1);
-  const limit = 3;
-  const offset = (page - 1) * limit;
+  const { updatePagination, page, prevArrow, nextArrow, offset, limit } =
+    usePagination();
 
   const renderCamplogList = () => {
     return (
@@ -38,7 +37,9 @@ export default function CampLog({ camplogs }: Props) {
           total={camplogs.length}
           limit={limit}
           page={page}
-          setPage={setPage}
+          prevArrow={prevArrow}
+          nextArrow={nextArrow}
+          updatePagination={updatePagination}
         />
       </Container>
     </Wrapper>

@@ -1,32 +1,40 @@
 import styled from "@emotion/styled";
 import nanoid from "features/common/utils/nanoid";
-import { SetStateAction, Dispatch } from "react";
 
 interface Props {
   total: number;
   limit: number;
   page: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  updatePagination: (i: number) => void;
+  nextArrow: () => void;
+  prevArrow: () => void;
 }
 
-export default function Pagination({ total, limit, page, setPage }: Props) {
+export default function Pagination({
+  total,
+  limit,
+  page,
+  updatePagination,
+  nextArrow,
+  prevArrow,
+}: Props) {
   const numPages = Math.ceil(total / limit);
 
   return (
     <Nav>
-      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+      <Button onClick={prevArrow} disabled={page === 1}>
         &lt;
       </Button>
       {Array.from({ length: numPages }).map((_, i) => (
         <Button
           key={nanoid()}
-          onClick={() => setPage(i + 1)}
+          onClick={() => updatePagination(i)}
           data-page={page === i + 1 ? "page" : "none"}
         >
           {i + 1}
         </Button>
       ))}
-      <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+      <Button onClick={nextArrow} disabled={page === numPages}>
         &gt;
       </Button>
     </Nav>

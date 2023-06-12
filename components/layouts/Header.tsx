@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
 import { IsAuthState } from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
 import { useCallback } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(IsAuthState);
-  const { memberInfo } = useMemberInfo();
+  const setIsLogin = useSetRecoilState(IsAuthState);
+  const memberInfo = useRecoilValue(MemberInfoState);
 
   const removeToken = useCallback(() => {
     sessionStorage.removeItem("access-token");
@@ -16,8 +16,9 @@ export default function Header() {
 
   const handleLgout = useCallback(() => {
     removeToken();
-    setIsLoggedIn(null);
-  }, [removeToken, setIsLoggedIn]);
+    setIsLogin(null);
+  }, [removeToken, setIsLogin]);
+
   return (
     <HeaderWrapper>
       <Gnb>

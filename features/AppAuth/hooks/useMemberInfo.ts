@@ -16,6 +16,7 @@ export const MemberInfoState = atom<null | Props>({
   key: "MemberInfoState",
   default: null,
 });
+
 export default function useMemberInfo() {
   const [memberInfo, setMemberInfo] = useRecoilState(MemberInfoState);
 

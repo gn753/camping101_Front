@@ -1,14 +1,15 @@
-import Container from "components/layouts/Container";
 import styled from "@emotion/styled";
-import { useState } from "react";
 import Link from "next/link";
-import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import { useState } from "react";
+import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
+import { useRecoilValue } from "recoil";
 import MyPageBookmark from "./components/MyPageBookmark";
 import CampResv from "./components/CampResv";
+import Container from "components/layouts/Container";
 
 export default function MyPage() {
   const [menu, setMenu] = useState(true);
-  const { memberInfo } = useMemberInfo();
+  const memberInfo = useRecoilValue(MemberInfoState);
   const memberId = memberInfo?.member_id;
 
   const handleBookmarkOn = () => {

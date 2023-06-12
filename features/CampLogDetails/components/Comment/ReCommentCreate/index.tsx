@@ -2,15 +2,16 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import fetchReCommentCreate from "features/CampLogDetails/service/fetchReCommentCreate";
-import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
 import useComments from "features/CampLogDetails/hooks/useComments";
+import { useRecoilValue } from "recoil";
 
 interface FormProps {
   commentContent: string;
 }
 
 export default function ReCommentCreate({ parentId, closeComment }: any) {
-  const { memberInfo } = useMemberInfo();
+  const memberInfo = useRecoilValue(MemberInfoState);
   const { getComments } = useComments();
   const { register, handleSubmit } = useForm<FormProps>({
     mode: "onSubmit",

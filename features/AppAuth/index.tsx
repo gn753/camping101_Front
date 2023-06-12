@@ -19,7 +19,7 @@ interface Response {
 }
 
 export default function AppAuth({ component }: MyAppProps) {
-  const { setMemberInfo, getMemberInfo } = useMemberInfo();
+  const { getMemberInfo } = useMemberInfo();
   const { updateLogin } = useLogin();
   const { getJwtToken } = authService();
 
