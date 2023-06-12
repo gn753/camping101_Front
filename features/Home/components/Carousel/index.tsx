@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { useLayoutEffect, useState, useRef } from "react";
 import { CampLogDetails, CampSiteDetails } from "features/Home/types";
-import nanoid from "features/common/utils/nanoid";
 import CarouselControls from "./CarouselControls";
 import CarouselItem from "./CarouselItem";
 
@@ -44,7 +43,7 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
                 title={slide.campName}
                 image={slide.firstImage}
                 id={slide.campId}
-                key={nanoid()}
+                key={`캠핑장 - ${slide.campId}`}
                 link={`/camp/details/${slide.campId}`}
               />
             ))}
@@ -54,7 +53,7 @@ export default function Carousel({ slideType, slides }: CarouselProps) {
                 title={slide.title}
                 image={slide.image}
                 id={slide.campLogId}
-                key={nanoid()}
+                key={`캠프로그 - ${slide.campLogId}`}
                 link={`/campLog/details/${slide.campLogId}`}
               />
             ))}

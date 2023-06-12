@@ -18,7 +18,7 @@ export default function CarouselItem({ title, id, image, link }: Props) {
   return (
     <Slide>
       <Link href={link}>
-        <Image src={sample} fill alt="샘플이미지" />
+        <Image src={sample} alt="샘플이미지" height={100} width={177} />
         <Title>{title}</Title>
       </Link>
     </Slide>
@@ -27,15 +27,9 @@ export default function CarouselItem({ title, id, image, link }: Props) {
 
 const Slide = styled.div`
   display: inline-block;
-  width: calc((100% - 60px) / 4);
+  width: 177px;
   margin-right: 20px;
   vertical-align: middle;
-  img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover !important;
-    position: relative !important;
-  }
 `;
 
 const Title = styled.h5`
