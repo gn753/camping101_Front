@@ -8,21 +8,21 @@ interface Props {
 }
 
 export default function CampReservation({ campSites }: Props) {
-  const renderCampSiteList = () => {
+  const isRenderCampSiteList = () => {
     const isRender = campSites && campSites.length > 0;
-
-    if (!isRender) {
-      return null;
-    }
 
     return (
       <>
-        {campSites.map((siteInCampList: SiteInCampList) => (
-          <ReservationCampSiteFind
-            siteInCampList={siteInCampList}
-            key={siteInCampList.siteId}
-          />
-        ))}
+        {isRender ? (
+          campSites.map((siteInCampList: SiteInCampList) => (
+            <ReservationCampSiteFind
+              siteInCampList={siteInCampList}
+              key={siteInCampList.siteId}
+            />
+          ))
+        ) : (
+          <div>등록된 캠핑장이 없습니다</div>
+        )}
       </>
     );
   };
@@ -30,7 +30,7 @@ export default function CampReservation({ campSites }: Props) {
   return (
     <>
       <ReservationCalendar />
-      <ViewCampSite>{renderCampSiteList()}</ViewCampSite>
+      <ViewCampSite>{isRenderCampSiteList()}</ViewCampSite>
     </>
   );
 }
