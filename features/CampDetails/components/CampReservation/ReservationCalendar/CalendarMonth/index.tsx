@@ -2,7 +2,6 @@ import moment from "moment"; // moment 라이브러리 추가
 import "moment/locale/ko"; // 한국어 설정
 import { useRef } from "react";
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
 import useIsSelectedDates from "features/CampDetails/hooks/useIsSelectedDates";
 import CalendarDate from "./CalendarDate";
 
@@ -51,8 +50,8 @@ export default function CalendarMonth({ monthDates, month }: Props) {
     <Wrapper>
       <Title>{month + 1}</Title>
       <CalendarMonthWrapper ref={ref}>
-        {[...Array(firstDay)].map(() => (
-          <Blank key={nanoid()} />
+        {[...Array(firstDay)].map((_, index) => (
+          <Blank key={index} />
         ))}
         {monthDates.map((data: any, index: number) => (
           <CalendarDate

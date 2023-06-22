@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
 import useBookmarks from "features/CampLogDetails/hooks/useBookmarks";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   title: string;
@@ -10,7 +11,8 @@ interface Props {
 }
 export default function CampLogBookmarkOnOff({ title, like }: Props) {
   const [isBookmark, setIsBookmark] = useState(false);
-  const { memberInfo } = useMemberInfo();
+  const memberInfo = useRecoilValue(MemberInfoState);
+
   const { addBookmarks, bookmarkList, deleteBookmarks, getBookmarks } =
     useBookmarks();
 
@@ -36,19 +38,20 @@ export default function CampLogBookmarkOnOff({ title, like }: Props) {
     }
   }, [bookmarkId]);
 
+  const isActiveBookamrk = () => {
+    if (!memberInfo) return false;
+    setIsBookmark(!isBookmark);
+  };
+
   return (
     <>
       {!isBookmark ? (
         <AddBookmark onClick={() => addBookmarks(newBookmark)}>
-          <IsActiveEvent onClick={() => setIsBookmark(!isBookmark)}>
-            북마크 추가
-          </IsActiveEvent>
+          <IsActiveEvent onClick={isActiveBookamrk}>북마크 추가</IsActiveEvent>
         </AddBookmark>
       ) : (
         <DeleteBookmark onClick={() => deleteBookmarks(bookmarkId)}>
-          <IsActiveEvent onClick={() => setIsBookmark(!isBookmark)}>
-            북마크 제거
-          </IsActiveEvent>
+          <IsActiveEvent onClick={isActiveBookamrk}>북마크 제거</IsActiveEvent>
         </DeleteBookmark>
       )}
       <LikeNum>{`좋아요 수 :${like}`}</LikeNum>

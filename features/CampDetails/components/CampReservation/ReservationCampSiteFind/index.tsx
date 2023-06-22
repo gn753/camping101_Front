@@ -1,4 +1,3 @@
-import nanoid from "features/common/utils/nanoid";
 import { SiteInCampList } from "features/CampDetails/types";
 import useFindAvailableCampSite from "features/CampDetails/hooks/useFindAvailableCampSite";
 import useIsSelectedDates from "features/CampDetails/hooks/useIsSelectedDates";
@@ -14,11 +13,9 @@ export default function ReservationCampSiteFind({ siteInCampList }: Props) {
     siteInCampList,
     selectedCalendarDates,
   });
-  console.log(availableSites, "availableSites");
-  console.log(selectedCalendarDates, " selectedCalendarDates");
+
   return (
     <AvailableCampSiteCard
-      key={nanoid()}
       campSite={siteInCampList}
       availableSites={availableSites}
     />

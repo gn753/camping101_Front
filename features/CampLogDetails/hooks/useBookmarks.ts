@@ -20,7 +20,7 @@ interface Bookmark {
   title: string;
 }
 
-const BookmarkListState = atom<Bookmark[]>({
+export const BookmarkListState = atom<Bookmark[]>({
   key: "BookmarkListState",
   default: [],
 });
@@ -37,7 +37,10 @@ export default function useBookmarks() {
   );
 
   const addBookmarks = useCallback(async (newBookmark: BookmarkAddData) => {
-    await fetchBookmarkCreate(newBookmark);
+    const { memberId } = newBookmark;
+    if (memberId) {
+      await fetchBookmarkCreate(newBookmark);
+    } else alert("로그인을 해주세요");
   }, []);
 
   const deleteBookmarks = async (bookmarkId: any) => {

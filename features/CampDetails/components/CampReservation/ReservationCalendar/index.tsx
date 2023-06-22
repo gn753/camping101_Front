@@ -3,7 +3,6 @@ import moment from "moment"; // moment 라이브러리 추가
 import styled from "@emotion/styled";
 import getDaysInMonth from "features/CampDetails/service/getDaysInMonth";
 import useIsSelectedDates from "features/CampDetails/hooks/useIsSelectedDates";
-import nanoid from "features/common/utils/nanoid";
 import Header from "./Header";
 import CalendarMonth from "./CalendarMonth";
 
@@ -21,7 +20,7 @@ export default function ReservationCalendar() {
               <CalendarMonth
                 monthDates={monthDates}
                 month={index}
-                key={nanoid()}
+                key={`${index}-월`}
               />
             ),
         )}

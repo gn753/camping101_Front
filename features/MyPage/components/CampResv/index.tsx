@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { axiosSetting } from "api/api";
-import nanoid from "features/common/utils/nanoid";
 import moment from "moment";
+import { axiosSetting } from "api/api";
 import { useCallback, useEffect, useState } from "react";
 import Pagination from "components/Pagination";
 import usePagination from "components/Pagination/hooks/usePagination";
@@ -53,7 +52,7 @@ export default function CampResv({ memberId }: any) {
     <>
       {resvs.length > 0 &&
         resvs.slice(offset, offset + limit).map((it: any) => (
-          <div key={nanoid()}>
+          <div key={it.reservationId}>
             <div>
               <strong>{it.siteName}</strong>
               <p>{it.reservationId}</p>

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <Wrapper>
       <Container>
-        <Text>Footer</Text>
+        <Text>Camping101</Text>
       </Container>
     </Wrapper>
   );
@@ -13,9 +13,13 @@ export default function Footer() {
 
 const Wrapper = styled.footer`
   height: 200px;
-  background-color: rgb(247, 249, 250);
+  background-color: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Text = styled.h1`
   font-size: 40px;
+  color: #fff;
 `;

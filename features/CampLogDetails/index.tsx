@@ -11,10 +11,6 @@ import Comment from "./components/Comment";
 interface Props {
   details: CampLogDetailsResponse;
 }
-const CampLogDetailsState = {
-  key: "CampLogDetailsState",
-  default: null,
-};
 
 export default function CampLogDetails({ details }: Props) {
   return (

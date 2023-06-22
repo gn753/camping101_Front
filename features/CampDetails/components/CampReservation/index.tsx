@@ -1,6 +1,5 @@
 import { SiteInCampList } from "features/CampDetails/types";
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
 import ReservationCalendar from "./ReservationCalendar";
 import ReservationCampSiteFind from "./ReservationCampSiteFind";
 
@@ -21,7 +20,7 @@ export default function CampReservation({ campSites }: Props) {
         {campSites.map((siteInCampList: SiteInCampList) => (
           <ReservationCampSiteFind
             siteInCampList={siteInCampList}
-            key={nanoid()}
+            key={siteInCampList.siteId}
           />
         ))}
       </>

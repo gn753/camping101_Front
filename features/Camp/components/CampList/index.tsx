@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
-import { useState } from "react";
 import Pagination from "components/Pagination";
 import CampCard from "./CampCard";
 import usePagination from "components/Pagination/hooks/usePagination";
@@ -16,7 +14,7 @@ export default function CampList<T>({ camps }: Props<T>) {
     <>
       <ListView>
         {camps.slice(offset, offset + limit).map((camp: any) => (
-          <CampCard key={nanoid()} {...camp} />
+          <CampCard key={camp.campId} {...camp} />
         ))}
       </ListView>
       <Pagination

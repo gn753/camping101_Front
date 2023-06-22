@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import CampLogCard from "features/CampLog/components/CampLogCard";
 import Container from "components/layouts/Container";
-import nanoid from "features/common/utils/nanoid";
 import Link from "next/link";
 import Pagination from "components/Pagination";
 import { CampLogResponse } from "./types";
@@ -19,7 +18,10 @@ export default function CampLog({ camplogs }: Props) {
     return (
       <>
         {camplogs.slice(offset, offset + limit).map((camplog) => (
-          <Link href={`/campLog/details/${camplog.campLogId}`} key={nanoid()}>
+          <Link
+            href={`/campLog/details/${camplog.campLogId}`}
+            key={camplog.campLogId}
+          >
             <CampLogCard {...camplog} />
           </Link>
         ))}

@@ -11,28 +11,16 @@ export const axiosSetting = axios.create({
 
 axiosSetting.defaults.withCredentials = true;
 
-const { getJwtToken, getRefreshToken } = authService();
+const { getRefreshToken } = authService();
 
 export const setAuthorizationHeader = (accessToken: string) => {
   if (accessToken) {
-    axiosSetting.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    const token = `Bearer ${accessToken}`;
+    axiosSetting.defaults.headers.common.Authorization = token;
   } else {
     delete axiosSetting.defaults.headers.common.Authorization;
   }
 };
-
-axiosSetting.interceptors.request.use(
-  (config) => {
-    config.headers.Authorization = `Bearer ${getJwtToken()}`;
-
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
-
-function tokenWithoutBearer(token: string) {
-  return token.replace("Bearer ", "");
-}
 
 const data: any = {};
 createAuthRefreshInterceptor(axiosSetting, (failedRequest) =>

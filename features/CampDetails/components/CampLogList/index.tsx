@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
 
 export default function CampLogList({ camplogs }: any) {
   return (
@@ -8,7 +7,7 @@ export default function CampLogList({ camplogs }: any) {
       <CardListWrapper>
         {camplogs &&
           camplogs.map((it: any) => (
-            <CardWrapper key={nanoid()}>
+            <CardWrapper key={it.campLogId}>
               <CardFigure src="http://placehold.it/400x300" />
               <CardBody>
                 <CardTitle>{it.campLogName}</CardTitle>

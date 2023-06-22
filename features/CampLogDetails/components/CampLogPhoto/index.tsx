@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import Image from "next/image";
 
 interface Props {
@@ -6,13 +7,20 @@ interface Props {
 
 export default function CampLogPhoto({ image }: Props) {
   return (
-    <figure className="photo">
+    <Figure>
       <Image
         src="/imgs/img-camplogDetails-01.jpg"
-        width="1924"
-        height="200"
         alt="샘플이미지"
+        width={1924}
+        height={150}
       />
-    </figure>
+    </Figure>
   );
 }
+
+const Figure = styled.figure`
+  img {
+    width: 100%;
+    height: 100px;
+  }
+`;

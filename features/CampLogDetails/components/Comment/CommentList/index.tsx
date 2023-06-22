@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
 import CommentParent from "./CommentParent";
 
 export default function CommentList({ comments, start, end }: any) {
@@ -11,7 +10,7 @@ export default function CommentList({ comments, start, end }: any) {
     return (
       <ul>
         {comments.slice(start, end).map((comment: any) => (
-          <CommentParent {...comment} key={nanoid()} />
+          <CommentParent {...comment} key={comment.commentId} />
         ))}
       </ul>
     );

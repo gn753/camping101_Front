@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { CampLogDetailsResponse } from "features/CampLogDetails/types";
-import nanoid from "features/common/utils/nanoid";
 
 interface Props {
   details: CampLogDetailsResponse;
@@ -19,7 +18,7 @@ export default function CampLogBody({ details }: Props) {
             <li>
               추천태그 :
               {recTags.map((tag, index) => (
-                <span key={nanoid()}>{tag}</span>
+                <span key={`${tag} - ${index}`}>{tag}</span>
               ))}
             </li>
           </ul>

@@ -1,29 +1,33 @@
 import styled from "@emotion/styled";
-import { MemberInfoState } from "features/AppAuth/hooks/useMemberInfo";
+import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
+import { BookmarkListState } from "features/CampLogDetails/hooks/useBookmarks";
 import { IsAuthState } from "features/SignIn/hooks/useLogin";
 import Link from "next/link";
 import { useCallback } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useResetRecoilState } from "recoil";
 
 export default function Header() {
-  const setIsLogin = useSetRecoilState(IsAuthState);
-  const memberInfo = useRecoilValue(MemberInfoState);
+  const resetLogin = useResetRecoilState(IsAuthState);
+  const resetBookmarkList = useResetRecoilState(BookmarkListState);
+  const { setMemberInfo, memberInfo } = useMemberInfo();
 
   const removeToken = useCallback(() => {
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("refresh-token");
   }, []);
 
-  const handleLgout = useCallback(() => {
+  const handleLogout = useCallback(() => {
     removeToken();
-    setIsLogin(null);
-  }, [removeToken, setIsLogin]);
+    resetLogin();
+    resetBookmarkList();
+    setMemberInfo(null);
+  }, [removeToken, resetLogin, resetBookmarkList]);
 
   return (
     <HeaderWrapper>
       <Gnb>
         <GnbList>
-          <Link href="/">캠핑 101 로고</Link>
+          <Link href="/">Camping101</Link>
           <Link href="/camp">캠핑장</Link>
           <Link href="/campLog">캠프로그</Link>
         </GnbList>
@@ -37,7 +41,7 @@ export default function Header() {
                 </Profile>
               </Link>
               <Link href="/signIn">
-                <button onClick={handleLgout}>로그아웃</button>
+                <button onClick={handleLogout}>로그아웃</button>
               </Link>
             </>
           ) : (

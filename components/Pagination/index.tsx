@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import nanoid from "features/common/utils/nanoid";
 
 interface Props {
   total: number;
@@ -27,7 +26,7 @@ export default function Pagination({
       </Button>
       {Array.from({ length: numPages }).map((_, i) => (
         <Button
-          key={nanoid()}
+          key={`${i} - 번호`}
           onClick={() => updatePagination(i)}
           data-page={page === i + 1 ? "page" : "none"}
         >

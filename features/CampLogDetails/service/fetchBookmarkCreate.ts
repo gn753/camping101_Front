@@ -9,13 +9,8 @@ interface PostBoomark {
 }
 
 const fetchBookmarkCreate = async (postData: PostBoomark) => {
-  const { memberId } = postData;
-  if (memberId) {
-    const response = await axiosSetting.post(url, postData);
-    return response;
-  } else {
-    alert("로그인을 해주세요");
-  }
+  const response = await axiosSetting.post(url, postData);
+  return response;
 };
 
 export default fetchBookmarkCreate;

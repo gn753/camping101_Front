@@ -4,7 +4,6 @@ import { ICommentParent } from "features/CampLogDetails/types";
 import useMemberInfo from "features/AppAuth/hooks/useMemberInfo";
 import { useState } from "react";
 import useComments from "features/CampLogDetails/hooks/useComments";
-import nanoid from "features/common/utils/nanoid";
 import CommentPut from "./CommnetPut";
 import CommentChildren from "./CommentChildren";
 import ReCommentCreate from "../ReCommentCreate";
@@ -24,7 +23,6 @@ export default function CommentParent({ ...comment }: ICommentParent) {
   } = comment;
 
   const date = moment(createdAt).fromNow();
-  const isReplyRender = reComments && reComments.length > 0;
 
   const handleIsPut = () => {
     setIsPut((put) => !put);
@@ -34,7 +32,7 @@ export default function CommentParent({ ...comment }: ICommentParent) {
     setIsReply(!isReply);
   };
   const 본인확인 = !!(memberInfo && memberInfo.email === writerEmail);
-
+  const 로그인확인 = memberInfo;
   return (
     <Wrapper>
       <Parent>
@@ -48,7 +46,7 @@ export default function CommentParent({ ...comment }: ICommentParent) {
           {본인확인 && (
             <Button role="button" onClick={handleIsPut} data-name="수정하기" />
           )}
-          {!본인확인 && (
+          {로그인확인 && (
             <Button
               role="button"
               onClick={handleIsReply}
@@ -69,8 +67,8 @@ export default function CommentParent({ ...comment }: ICommentParent) {
       )}
       {isPut && <CommentPut comment={comment} closeCommentPut={handleIsPut} />}
       {reComments.length > 0 &&
-        reComments.map((reComment) => (
-          <CommentChildren reComment={reComment} key={nanoid()} />
+        reComments.map((reComment: any) => (
+          <CommentChildren reComment={reComment} key={reComment.reCommentId} />
         ))}
     </Wrapper>
   );

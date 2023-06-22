@@ -57,7 +57,7 @@ export default function CommentChildren({ reComment }: Props) {
   );
 }
 
-const Wrapper = styled.li`
+const Wrapper = styled.ul`
   padding-left: 42px;
   div + form {
     padding-left: 20px;
@@ -99,7 +99,7 @@ const Footer = styled.div`
   width: 100%;
 `;
 
-const Parent = styled.div`
+const Parent = styled.li`
   position: relative;
 `;
 
