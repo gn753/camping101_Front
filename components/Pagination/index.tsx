@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 
 interface Props {
   total: number;
@@ -17,23 +18,28 @@ export default function Pagination({
   nextArrow,
   prevArrow,
 }: Props) {
-  const numPages = Math.ceil(total / limit);
+  const totalPageNumber = Math.ceil(total / limit);
+
+  const totalPages = Array.from(
+    Array(totalPageNumber),
+    (_, index) => index + 1,
+  );
 
   return (
     <Nav>
       <Button onClick={prevArrow} disabled={page === 1}>
         &lt;
       </Button>
-      {Array.from({ length: numPages }).map((_, i) => (
+      {totalPages.map((num: number) => (
         <Button
-          key={`${i} - 번호`}
-          onClick={() => updatePagination(i)}
-          data-page={page === i + 1 ? "page" : "none"}
+          key={`${num}-번호`}
+          onClick={() => updatePagination(num)}
+          data-page={page === num + 1 ? "page" : "none"}
         >
-          {i + 1}
+          {num}
         </Button>
       ))}
-      <Button onClick={nextArrow} disabled={page === numPages}>
+      <Button onClick={nextArrow} disabled={page === totalPageNumber}>
         &gt;
       </Button>
     </Nav>

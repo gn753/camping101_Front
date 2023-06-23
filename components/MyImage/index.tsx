@@ -4,11 +4,9 @@ import Image from "next/image";
 interface Props {
   url: string;
   alt: string;
-  size?: number;
-  fill?: string;
 }
 
-export default function MyImage({ url, alt, size, fill }: Props) {
+export default function MyImage({ url, alt }: Props) {
   return (
     <Wrapper>
       <Img src={url} alt={alt} fill priority />

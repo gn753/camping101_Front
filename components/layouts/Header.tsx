@@ -21,7 +21,7 @@ export default function Header() {
     resetLogin();
     resetBookmarkList();
     setMemberInfo(null);
-  }, [removeToken, resetLogin, resetBookmarkList]);
+  }, [removeToken, resetLogin, resetBookmarkList, setMemberInfo]);
 
   return (
     <HeaderWrapper>
