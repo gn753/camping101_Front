@@ -13,7 +13,7 @@ export default function MyPageFormInputList({ register }: any) {
       </FormInputTextFiled>
       <FormInputTextFiled>
         <label htmlFor="패스워드">패스워드</label>
-        <Input id="패스워드" {...register("password")} />
+        <Input id="패스워드" type="password" {...register("password")} />
       </FormInputTextFiled>
       <FormInputTextFiled>
         <label htmlFor="연락처">연락처</label>

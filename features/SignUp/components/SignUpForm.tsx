@@ -82,7 +82,7 @@ export default function SignUpForm() {
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>패스워드</label>
-          <Input {...register("password")} />
+          <Input type="password" {...register("password")} />
         </FormInputTextFiled>
         <FormInputTextFiled>
           <label>연락처</label>

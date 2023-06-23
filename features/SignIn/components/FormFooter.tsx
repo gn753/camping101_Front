@@ -7,7 +7,7 @@ export default function FormFooter() {
     <Navigation>
       <ul>
         <li>
-          <Link href="/signIn">회원가입하기</Link>
+          <Link href="/signUp">회원가입하기</Link>
         </li>
         <li>
           <PasswordFind title="비밀번호 찾기" />
