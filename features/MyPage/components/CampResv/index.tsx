@@ -62,13 +62,15 @@ export default function CampResv({ memberId }: any) {
               </p>
               <p>{it.cancelAt && `취소날짜 :${it.cancelAt.slice(0, 10)}`}</p>
               <p> 인원수 : {it.humanCapacity}</p>
-              <Button
-                onClick={() => {
-                  deleteResv(it.reservationId, it.startDate);
-                }}
-              >
-                {devideResvCancel(it.startDate)}
-              </Button>
+              {!it.cancelAt && (
+                <Button
+                  onClick={() => {
+                    deleteResv(it.reservationId, it.startDate);
+                  }}
+                >
+                  {devideResvCancel(it.startDate)}
+                </Button>
+              )}
             </div>
           </div>
         ))}

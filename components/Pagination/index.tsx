@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useEffect } from "react";
 
 interface Props {
   total: number;
@@ -24,7 +23,7 @@ export default function Pagination({
     Array(totalPageNumber),
     (_, index) => index + 1,
   );
-
+  console.log(totalPages);
   return (
     <Nav>
       <Button onClick={prevArrow} disabled={page === 1}>
@@ -34,7 +33,7 @@ export default function Pagination({
         <Button
           key={`${num}-번호`}
           onClick={() => updatePagination(num)}
-          data-page={page === num + 1 ? "page" : "none"}
+          data-page={page === num ? "active" : "none"}
         >
           {num}
         </Button>
@@ -69,7 +68,7 @@ const Button = styled.button`
     transform: translateY(-2px);
   }
 
-  &[data-page="page"] {
+  &[data-page="active"] {
     background: deeppink;
     font-weight: bold;
     cursor: revert;

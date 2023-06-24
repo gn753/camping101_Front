@@ -10,7 +10,7 @@ export default function usePagination() {
   };
 
   const updatePagination = (index: number) => {
-    setPage(index + 1);
+    setPage(index);
   };
 
   const nextArrow = () => {
